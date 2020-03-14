@@ -1,0 +1,20 @@
+{{ $pages := site.RegularPages }}
+<nav class="level" style="padding: 20px;">
+  	{{ with $pages.Next .}}
+  	<div class="level-item has-text-centered">
+  		<div>
+      		<p class="subtitle">上一章</p>
+      		<a class="title" href="{{ .Permalink }}">{{ .Title }}</a>
+      	</div>
+  	</div>
+  	{{ end }}
+
+  	{{ with $pages.Prev .}}
+  	<div class="level-item has-text-centered">
+  		<div>
+      		<p class="subtitle">下一章</p>
+      		<a class="title" href="{{ .Permalink }}">{{ .Title }}</a>
+      	</div>
+  	</div>
+  	{{ end }}
+</nav>

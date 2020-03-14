@@ -1,0 +1,24 @@
+<!DOCTYPE html>
+<html>
+  	<head>
+    	<meta charset="utf-8">
+    	<meta name="viewport" content="width=device-width, initial-scale=1">
+
+    	{{ if .IsHome -}}
+  		<title>{{ .Site.Title }}</title>
+  		{{- else -}}
+  		<title>{{ .Title }} &middot; {{ .Site.Title }}</title>
+  		{{- end }}
+
+		{{- partial "head.html" . -}}
+  	</head>
+    <body>
+        {{- partial "header.html" . -}}
+        <section class="section">
+  			<div class="container">
+        		{{- block "main" . }}{{- end }}
+            </div>
+		</section>
+        {{- partial "footer.html" . -}}
+    </body>
+</html>

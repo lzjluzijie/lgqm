@@ -1,0 +1,15 @@
+{{- define "title" }}{{ .Title }} · {{ .Site.Title }}{{ end -}}
+
+{{- define "content" }}
+<section id="archive" class="archive">
+  {{ range .Pages.ByParam "id" -}}
+    <div class="archive-post">
+      <span class="archive-post-title">
+        <a href="{{ .RelPermalink }}" class="archive-post-link">
+          {{ printf "%04d" .Params.id }} {{ .Title }}
+        </a>
+      </span>
+    </div>
+  {{- end }}
+</section>
+{{- end }}

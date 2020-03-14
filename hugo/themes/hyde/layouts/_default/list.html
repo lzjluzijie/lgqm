@@ -1,0 +1,9 @@
+{{ define "main" -}}
+<ul class="posts">
+{{ range .Pages.ByParam "id" -}}
+  <li>
+    <span><a href="{{ .Permalink }}">{{ printf "%04d" .Params.id }} {{ .Title }}</a></span>
+  </li>
+{{- end }}
+</ul>
+{{- end }}

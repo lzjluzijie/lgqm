@@ -1,0 +1,15 @@
+{{ define "main" -}}
+
+{{- partial "next.html" . -}}
+
+<article class="post">
+  <div class="content is-size-4">
+  	<h1 class="title has-text-centered">{{ .Title }}</h1>
+  	<p class="subtitle has-text-centered">{{ $.Param "author" }} | 共 {{ .WordCount }} 字</p>
+    {{ .Content }}
+  </div>
+</article>
+
+{{ partial "next.html" . }}
+
+{{- end }}
