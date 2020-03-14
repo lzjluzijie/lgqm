@@ -5,3 +5,7 @@ title = "临高启明"
 theme = "lgqm"
 hasCJKLanguage = true
 enableGitInfo = true
+
+[params]
+  gitRepo = "https://github.com/lzjluzijie/lgqm"
+  editURL = "https://github.com/lzjluzijie/lgqm/edit/master/hugo/content/"
