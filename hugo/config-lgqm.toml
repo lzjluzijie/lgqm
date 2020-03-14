@@ -1,6 +1,0 @@
-baseURL = "https://lgqm.halu.lu/"
-languageCode = "zh"
-defaultContentLanguage = "zh-cn"
-title = "临高启明"
-theme = "lgqm"
-hasCJKLanguage = true
