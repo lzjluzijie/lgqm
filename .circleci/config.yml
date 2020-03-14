@@ -9,7 +9,7 @@ jobs:
           fingerprints:
             - "cb:80:d9:b2:c8:cc:df:89:b3:e3:dc:55:db:27:89:a9"
       - checkout
-      - run: bash deploy.sh
+      - run: bash hugo/deploy.sh
 
 workflows:
   version: 2
