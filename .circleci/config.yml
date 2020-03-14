@@ -7,7 +7,7 @@ jobs:
     steps:
       - add_ssh_keys:
           fingerprints:
-            - "cb:80:d9:b2:c8:cc:df:89:b3:e3:dc:55:db:27:89:a9"
+            - "dd:49:52:fb:19:d0:e4:41:fd:70:e0:c0:fc:60:7a:89"
       - checkout
       - run: bash hugo/deploy.sh
 
