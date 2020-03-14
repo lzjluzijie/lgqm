@@ -4,4 +4,4 @@ defaultContentLanguage = "zh-cn"
 title = "临高启明"
 theme = "lgqm"
 hasCJKLanguage = true
-#enableGitInfo = true
+enableGitInfo = true
