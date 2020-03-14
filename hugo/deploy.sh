@@ -9,7 +9,7 @@ cd hugo
 curl -L -o hugo.tar.gz https://github.com/gohugoio/hugo/releases/download/v0.67.0/hugo_0.67.0_Linux-64bit.tar.gz
 tar -xzvf hugo.tar.gz
 
-git clone git@github.com:lzjluzijie/blog.git -b gh-pages gh-pages
+git clone git@github.com:lzjluzijie/lgqm.git -b gh-pages gh-pages
 
 #build site
 ./hugo
