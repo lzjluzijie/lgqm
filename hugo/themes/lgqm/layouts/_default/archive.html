@@ -1,0 +1,27 @@
+{{ define "main" -}}
+<article class="post">
+    <div class="content is-size-4">
+    {{ .Content }}
+    </div>
+</article>
+
+<h2 class="title is-size-3">以下是已收录分卷列表，共 {{len .Site.Sections}} 卷</h2>
+<ul class="content is-size-4">
+{{ range .Site.Sections.ByParam "aid" }}
+  <li>
+    <span><a href="{{ .Permalink }}">{{ .Title }}</a></span>
+  </li>
+{{- end }}
+</ul>
+
+</br>
+
+<h2 class="title is-size-3">以下是已收录的章节列表，共 {{len .Site.RegularPages}} 篇</h2>
+<ul class="content is-size-4">
+{{ range .Site.RegularPages.ByParam "id" -}}
+  <li>
+    <span><a href="{{ .Permalink }}">{{ .Title }}</a></span>
+  </li>
+{{- end }}
+</ul>
+{{- end }}

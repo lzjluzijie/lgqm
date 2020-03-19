@@ -5,9 +5,9 @@
     </div>
 </article>
 
-<h2 class="title is-size-3">以下是已收录文章汇总，共 {{len .Pages}} 卷</h2>
+<h2 class="title is-size-3">以下是已收录分卷列表，共 {{len .Site.Sections}} 卷</h2>
 <ul class="content is-size-4">
-{{ range .Pages.ByParam "aid" }}
+{{ range .Site.Sections.ByParam "aid" }}
   <li>
     <span><a href="{{ .Permalink }}">{{ .Title }}</a></span>
   </li>
