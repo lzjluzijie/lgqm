@@ -185,7 +185,7 @@ func d1() {
 			Title:   ts[2],
 			Author:  "吹牛者",
 			Tags:    []string{"正文"},
-			Content: s[7],
+			Content: strings.ReplaceAll(s[7], "　　", "  "),
 		}
 
 		cs = append(cs, c)
@@ -296,7 +296,7 @@ func d3() {
 		}
 
 		if len(l) >= 4 && l[:4] == "    " {
-			ts += l[4:] + "\n"
+			ts += "  " + l[4:] + "\n"
 			continue
 		}
 
@@ -362,31 +362,36 @@ func h1() {
 }
 
 func txt() {
-	t, err := os.Create("lgqm.txt")
+	t, err := os.Create("临高启明-精校版-Halulu.txt")
 	if err != nil {
 		panic(err)
 	}
 
-	dirs, err := ioutil.ReadDir("./hugo/content")
+	dirs, err := ioutil.ReadDir("./output")
+	if err != nil {
+		panic(err)
+	}
+
+	_, err = t.WriteString("临高启明精校版由Halulu整理，获取最新更新请访问官网 https://lgqm.halu.lu/ \n\n\n\n")
 	if err != nil {
 		panic(err)
 	}
 
 	for _, dir := range dirs {
-		files, err := ioutil.ReadDir("./hugo/content/" + dir.Name())
+		files, err := ioutil.ReadDir("./output/" + dir.Name())
 		if err != nil {
 			panic(err)
 		}
 
 		for _, file := range files {
-			p := "./hugo/content/" + dir.Name() + "/" + file.Name()
+			p := "./output/" + dir.Name() + "/" + file.Name()
 			data, err := ioutil.ReadFile(p)
 			if err != nil {
 				panic(err)
 			}
 
-			ds := strings.SplitAfterN(string(data), "\n", 13)
-			_, err = t.WriteString(ds[3][7:]+"\n"+ds[12])
+			ds := strings.SplitAfterN(string(data), "\n", 14)
+			_, err = t.WriteString(ds[4][7:]+"\n"+ds[13])
 			if err != nil {
 				panic(err)
 			}
@@ -403,8 +408,7 @@ func main() {
 
 	//d1()
 	//d2()
-	d3()
-	//d4()
+	//d3()
 
 	//h1()
 
