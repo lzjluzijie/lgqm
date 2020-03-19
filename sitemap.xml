@@ -4,8 +4,13 @@
   
   <url>
     <loc>https://lgqm.halu.lu/</loc>
-    <lastmod>2020-03-19T16:52:54-04:00</lastmod>
+    <lastmod>2020-03-19T17:27:13-04:00</lastmod>
     <priority>0</priority>
+  </url>
+  
+  <url>
+    <loc>https://lgqm.halu.lu/archive/</loc>
+    <lastmod>2020-03-19T17:27:13-04:00</lastmod>
   </url>
   
   <url>
@@ -240,11 +245,6 @@
   
   <url>
     <loc>https://lgqm.halu.lu/0001/0047/</loc>
-    <lastmod>2020-03-19T16:52:54-04:00</lastmod>
-  </url>
-  
-  <url>
-    <loc>https://lgqm.halu.lu/0001/</loc>
     <lastmod>2020-03-19T16:52:54-04:00</lastmod>
   </url>
   
@@ -1160,11 +1160,6 @@
   
   <url>
     <loc>https://lgqm.halu.lu/0002/0183/</loc>
-    <lastmod>2020-03-19T16:52:54-04:00</lastmod>
-  </url>
-  
-  <url>
-    <loc>https://lgqm.halu.lu/0002/</loc>
     <lastmod>2020-03-19T16:52:54-04:00</lastmod>
   </url>
   
@@ -3079,11 +3074,6 @@
   </url>
   
   <url>
-    <loc>https://lgqm.halu.lu/0003/</loc>
-    <lastmod>2020-03-19T16:52:54-04:00</lastmod>
-  </url>
-  
-  <url>
     <loc>https://lgqm.halu.lu/0004/0001/</loc>
     <lastmod>2020-03-19T16:52:54-04:00</lastmod>
   </url>
@@ -4265,11 +4255,6 @@
   
   <url>
     <loc>https://lgqm.halu.lu/0004/0237/</loc>
-    <lastmod>2020-03-19T16:52:54-04:00</lastmod>
-  </url>
-  
-  <url>
-    <loc>https://lgqm.halu.lu/0004/</loc>
     <lastmod>2020-03-19T16:52:54-04:00</lastmod>
   </url>
   
@@ -6630,11 +6615,6 @@
   
   <url>
     <loc>https://lgqm.halu.lu/0005/0472/</loc>
-    <lastmod>2020-03-19T16:52:54-04:00</lastmod>
-  </url>
-  
-  <url>
-    <loc>https://lgqm.halu.lu/0005/</loc>
     <lastmod>2020-03-19T16:52:54-04:00</lastmod>
   </url>
   
@@ -9054,11 +9034,6 @@
   </url>
   
   <url>
-    <loc>https://lgqm.halu.lu/0006/</loc>
-    <lastmod>2020-03-19T16:52:54-04:00</lastmod>
-  </url>
-  
-  <url>
     <loc>https://lgqm.halu.lu/0007/0001/</loc>
     <lastmod>2020-03-19T16:52:54-04:00</lastmod>
   </url>
@@ -11354,11 +11329,6 @@
   </url>
   
   <url>
-    <loc>https://lgqm.halu.lu/0007/</loc>
-    <lastmod>2020-03-19T16:52:54-04:00</lastmod>
-  </url>
-  
-  <url>
     <loc>https://lgqm.halu.lu/0008/0001/</loc>
     <lastmod>2020-03-19T16:52:54-04:00</lastmod>
   </url>
@@ -12424,11 +12394,6 @@
   </url>
   
   <url>
-    <loc>https://lgqm.halu.lu/0008/</loc>
-    <lastmod>2020-03-19T16:52:54-04:00</lastmod>
-  </url>
-  
-  <url>
     <loc>https://lgqm.halu.lu/categories/</loc>
   </url>
   
@@ -12440,6 +12405,46 @@
   <url>
     <loc>https://lgqm.halu.lu/tags/%E6%AD%A3%E6%96%87/</loc>
     <lastmod>2020-03-19T16:52:54-04:00</lastmod>
+  </url>
+  
+  <url>
+    <loc>https://lgqm.halu.lu/0001/</loc>
+    <lastmod>2020-03-19T17:14:46-04:00</lastmod>
+  </url>
+  
+  <url>
+    <loc>https://lgqm.halu.lu/0007/</loc>
+    <lastmod>2020-03-19T17:14:46-04:00</lastmod>
+  </url>
+  
+  <url>
+    <loc>https://lgqm.halu.lu/0003/</loc>
+    <lastmod>2020-03-19T17:14:46-04:00</lastmod>
+  </url>
+  
+  <url>
+    <loc>https://lgqm.halu.lu/0002/</loc>
+    <lastmod>2020-03-19T17:14:46-04:00</lastmod>
+  </url>
+  
+  <url>
+    <loc>https://lgqm.halu.lu/0005/</loc>
+    <lastmod>2020-03-19T17:14:46-04:00</lastmod>
+  </url>
+  
+  <url>
+    <loc>https://lgqm.halu.lu/0008/</loc>
+    <lastmod>2020-03-19T17:14:46-04:00</lastmod>
+  </url>
+  
+  <url>
+    <loc>https://lgqm.halu.lu/0006/</loc>
+    <lastmod>2020-03-19T17:14:46-04:00</lastmod>
+  </url>
+  
+  <url>
+    <loc>https://lgqm.halu.lu/0004/</loc>
+    <lastmod>2020-03-19T17:14:46-04:00</lastmod>
   </url>
   
 </urlset>
