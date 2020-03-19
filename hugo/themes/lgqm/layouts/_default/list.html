@@ -1,4 +1,15 @@
 {{ define "main" -}}
+<h1 class="title has-text-centered">{{ .Title }}</h1>
+
+<article class="post">
+    <div class="content is-size-4">
+		{{ .Content }}
+    </div>
+</article>
+
+</br>
+
+<p class="content is-size-4">本章共收录 {{ len .Pages }} 篇文章</p>
 <ul class="content is-size-4">
 {{ range .Pages.ByParam "id" -}}
   <li>

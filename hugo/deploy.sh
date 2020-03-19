@@ -6,7 +6,7 @@ git config --global core.quotepath false
 cd hugo
 
 #download hugo
-curl -L -o hugo.tar.gz https://github.com/gohugoio/hugo/releases/download/v0.67.0/hugo_0.67.0_Linux-64bit.tar.gz
+curl -L -o hugo.tar.gz https://github.com/gohugoio/hugo/releases/download/v0.67.3/hugo_0.67.3_Linux-64bit.tar.gz
 tar -xzvf hugo.tar.gz
 
 git clone git@github.com:lzjluzijie/lgqm.git -b gh-pages gh-pages
