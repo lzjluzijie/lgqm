@@ -5,6 +5,7 @@ import (
 	"io/ioutil"
 	"os"
 	"regexp"
+	"sort"
 	"strings"
 	"text/template"
 )
@@ -16,6 +17,7 @@ type Volume struct {
 type Chapter struct {
 	Aid     int
 	Zid     int
+	Uid	int
 	Title   string
 	Author  string
 	Tags    []string
@@ -25,6 +27,7 @@ type Chapter struct {
 const mc = `---
 aid: {{ .Aid }}
 zid: {{ .Zid }}
+uid: {{ .Uid }}
 title: {{ printf "%04d.%04d-%s" .Aid .Zid .Title }}
 author: {{ .Author }}
 tags: {{ range $tag := .Tags }}
@@ -36,6 +39,17 @@ tags: {{ range $tag := .Tags }}
 {{ .Content }}
 
 `
+
+var tc *template.Template
+
+func init()  {
+	t,  err := template.New("chapter").Parse(mc)
+	if err != nil {
+		panic(err)
+	}
+
+	tc = t
+}
 
 /*
 从开篇到被封
@@ -105,20 +119,33 @@ func d0() {
 	}
 }
 
+func output(chapter Chapter) {
+	f, err := os.Create(fmt.Sprintf("./output/%04d/%04d.md", chapter.Aid, chapter.Zid))
+	if err != nil {
+		panic(err)
+	}
+
+	fmt.Printf("%v\n", chapter.Title)
+	err = tc.Execute(f, chapter)
+
+	if err != nil {
+		panic(err)
+	}
+}
+
 /*
 https://github.com/lzjluzijie/lingaoqiming.github.com
 从开篇到第七章110
 */
-func d2() {
+func d1() {
+	uid := 1
+
 	files, err := ioutil.ReadDir("./lingaoqiming.github.com/_posts")
 	if err != nil {
 		panic(err)
 	}
 
-	tc, err := template.New("chapter").Parse(mc)
-	if err != nil {
-		panic(err)
-	}
+	var cs []Chapter
 
 	for _, file := range files {
 		var y, m, d, a, b int
@@ -152,121 +179,109 @@ func d2() {
 		ts := strings.Split(strings.ReplaceAll(strings.ReplaceAll(strings.ReplaceAll(s[2], " ", " "), "　", " "), "\n", ""), " ")
 		//fmt.Println(ts)
 
-		f, err := os.Create(fmt.Sprintf("./data/%04d/%04d.md", a, b))
-		if err != nil {
-			panic(err)
-		}
-
-		fmt.Printf("%v\n", ts[2])
-		err = tc.Execute(f, Chapter{
+		c := Chapter{
 			Aid:     a,
 			Zid:     b,
 			Title:   ts[2],
 			Author:  "吹牛者",
 			Tags:    []string{"正文"},
 			Content: s[7],
-		})
-
-		if err != nil {
-			panic(err)
 		}
+
+		cs = append(cs, c)
+	}
+
+	sort.SliceStable(cs, func(i, j int) bool { return cs[i].Aid<cs[j].Aid || (cs[i].Aid==cs[j].Aid && cs[i].Zid<cs[j].Zid)})
+
+	for _, c := range cs{
+		c.Uid = uid
+		output(c)
+		uid++
 	}
 }
 
 /*
 从第七章广州攻略篇111到结束
 */
-func d3() {
-	data, err := ioutil.ReadFile("txtren.txt")
+func d2() {
+	uid := 1915
+
+	data, err := ioutil.ReadFile("d2.txt")
 	if err != nil {
 		panic(err)
 	}
 
 	str := string(data)
 	ls := strings.Split(str, "\r\n")
-	ls = ls[200764:]
 	ts := ""
 	var cs []Chapter
-	id := 0
+	id := 110
 
 	c := make(chan string, 1)
 
-	tc, err := template.New("chapter").Parse(mc)
-	if err != nil {
-		panic(err)
-	}
-
 	for _, l := range ls {
 		//fmt.Println([]byte(l))
+
 		if l == "" {
 			ts += "\n"
 			continue
 		}
 
 		if len(l) >= 4 && l[:4] == "    " {
-			ts += l[4:] + "\n"
+			ts += "  " + l[4:] + "\n"
 			continue
 		}
 
 		//这里从0开始的
-		if id != 0 {
+		if id != 110 {
 			c <- ts
 			ts = ""
 		}
 		id++
 
 		fmt.Println(strings.Replace(l[1:], "?", " ", -1))
-		go func(id int, title string) {
+		go func(id, uid int, title string) {
 			s := <-c
 
 			cs = append(cs, Chapter{
-				Aid:     8,
+				Aid:     7,
 				Zid:     id,
+				Uid: uid,
 				Title:   title,
 				Author:  "吹牛者",
 				Tags:    []string{"正文"},
 				Content: s,
 			})
-		}(id, strings.Replace(l[1:], "?", " ", -1))
+		}(id, uid, strings.Replace(l[1:], "?", " ", -1))
+
+		uid++
 	}
 
 	//fmt.Println(cs)
 
 	for _, c := range cs {
-		f, err := os.Create(fmt.Sprintf("./data/0008/%04d.md", c.Zid))
-		if err != nil {
-			panic(err)
-		}
-
-		err = tc.Execute(f, c)
-		if err != nil {
-			panic(err)
-		}
+		output(c)
 	}
 }
 
 /*
 两广攻略篇
 */
-func d4() {
-	data, err := ioutil.ReadFile("365book.txt")
+func d3() {
+	uid := 2264
+
+	data, err := ioutil.ReadFile("d3.txt")
 	if err != nil {
 		panic(err)
 	}
 
 	str := string(data)
 	ls := strings.Split(str, "\r\n")
-	ls = ls[224358:]
 	ts := ""
 	var cs []Chapter
-	id := 184
+	id := 0
 
 	c := make(chan string, 1)
-
-	tc, err := template.New("chapter").Parse(mc)
-	if err != nil {
-		panic(err)
-	}
 
 	for _, l := range ls {
 		//fmt.Println([]byte(l))
@@ -285,59 +300,54 @@ func d4() {
 			continue
 		}
 
-		//这里从184开始的
-		if id != 184 {
+		//这里从1开始的
+		if id != 0 {
 			c <- ts
 			ts = ""
 		}
 		id++
 
-		go func(id int, title string) {
+		go func(id, uid int, title string) {
 			fmt.Println(title)
 			s := <-c
 
 			cs = append(cs, Chapter{
 				Aid:     8,
 				Zid:     id,
+				Uid: uid,
 				Title:   title,
 				Author:  "吹牛者",
 				Tags:    []string{"正文"},
 				Content: s,
 			})
-		}(id, strings.Replace(l, "?", " ", -1))
+		}(id, uid, strings.Replace(l, "?", " ", -1))
+
+		uid++
 	}
 
 	//fmt.Println(cs)
 
 	for _, c := range cs {
-		f, err := os.Create(fmt.Sprintf("./data/0008/%04d.md", c.Zid))
-		if err != nil {
-			panic(err)
-		}
-
-		err = tc.Execute(f, c)
-		if err != nil {
-			panic(err)
-		}
+		output(c)
 	}
 }
 
 func h1() {
 	re := regexp.MustCompile(`\[(.{3}|.{2})\]\[y\d{3}\]`)
 
-	dirs, err := ioutil.ReadDir("./hugo/content")
+	dirs, err := ioutil.ReadDir("./output")
 	if err != nil {
 		panic(err)
 	}
 
 	for _, dir := range dirs {
-		files, err := ioutil.ReadDir("./hugo/content/" + dir.Name())
+		files, err := ioutil.ReadDir("./output/" + dir.Name())
 		if err != nil {
 			panic(err)
 		}
 
 		for _, file := range files {
-			p := "./hugo/content/" + dir.Name() + "/" + file.Name()
+			p := "./output/" + dir.Name() + "/" + file.Name()
 			data, err := ioutil.ReadFile(p)
 			if err != nil {
 				panic(err)
@@ -390,12 +400,13 @@ func p1() {
 
 func main() {
 	//d0()
+
 	//d1()
 	//d2()
-	//d3()
+	d3()
 	//d4()
 
 	//h1()
 
-	txt()
+	//txt()
 }
