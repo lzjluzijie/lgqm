@@ -333,7 +333,8 @@ func d3() {
 }
 
 func h1() {
-	re := regexp.MustCompile(`\[(.{3}|.{2})\]\[y\d{3}\]`)
+	r1 := regexp.MustCompile(`\[(.{3}|.{2})\]\[y\d{3}\]`)
+	r2 := regexp.MustCompile(`\[y\d{3}\]: \/characters\/y\d{3} "(.{3}|.{2})"\r\n`)
 
 	dirs, err := ioutil.ReadDir("./output")
 	if err != nil {
@@ -353,13 +354,15 @@ func h1() {
 				panic(err)
 			}
 
-			err = ioutil.WriteFile(p, re.ReplaceAll(data, []byte("$1")), 0600)
+			err = ioutil.WriteFile(p, r2.ReplaceAll(r1.ReplaceAll(data, []byte("$1")), []byte("")), 0600)
 			if err != nil {
 				panic(err)
 			}
 		}
 	}
 }
+
+
 
 func txt() {
 	t, err := os.Create("临高启明-精校版-Halulu.txt")
@@ -410,7 +413,7 @@ func main() {
 	//d2()
 	//d3()
 
-	//h1()
+	h1()
 
 	//txt()
 }
