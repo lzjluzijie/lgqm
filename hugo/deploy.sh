@@ -12,7 +12,7 @@ tar -xzvf hugo.tar.gz
 git clone git@github.com:lzjluzijie/lgqm.git -b gh-pages gh-pages
 
 #build site
-./hugo
+./hugo --minify
 cp gh-pages/.git public -r
 
 #deploy

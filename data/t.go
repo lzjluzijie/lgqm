@@ -252,7 +252,7 @@ func d2() {
 				Tags:    []string{"正文"},
 				Content: s,
 			})
-		}(id, uid, strings.Replace(l[1:], "?", " ", -1))
+		}(id, uid, strings.Replace(strings.SplitAfterN(l[1:], " ", 2)[1], "?", " ", -1))
 
 		uid++
 	}
@@ -320,7 +320,7 @@ func d3() {
 				Tags:    []string{"正文"},
 				Content: s,
 			})
-		}(id, uid, strings.Replace(l, "?", " ", -1))
+		}(id, uid, strings.Replace(strings.SplitAfterN(l, " ", 2)[1], "?", " ", -1))
 
 		uid++
 	}
@@ -413,7 +413,7 @@ func main() {
 	//d2()
 	//d3()
 
-	h1()
+	//h1()
 
-	//txt()
+	txt()
 }
