@@ -1,7 +1,7 @@
 baseURL = "https://lgqm.halu.lu/"
 languageCode = "zh"
 defaultContentLanguage = "zh-cn"
-title = "临高启明"
+title = "临高启明公开图书馆"
 theme = "lgqm"
 hasCJKLanguage = true
 enableGitInfo = true
