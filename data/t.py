@@ -15,7 +15,7 @@ s = s[0][0]
 #     else:
 #         inner(element[0])
 
-t = '---\naid: 2002\nzid: %d\ntitle: 2002.%04d-%s\n---\n\n'
+t = '---\naid: 2002\nzid: %d\ntitle: 2002.%04d-%s\nauthor: 社会主义螺丝刀\n---\n\n'
 
 zid = 1
 for n in s:
