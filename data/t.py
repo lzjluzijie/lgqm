@@ -22,4 +22,5 @@ def wiki2md(aid, author):
 
 
 # wiki2md("2004", "社会主义螺丝刀")
-wiki2md("2005", "QDD")
+#wiki2md("2005", "QDD")
+wiki2md("2006", "QDD")
