@@ -21,7 +21,8 @@ def wiki2md(aid, author):
                 f.write("\n")
 
 
-wiki2md("2004", "社会主义螺丝刀")
+#wiki2md("2004", "社会主义螺丝刀")
 #wiki2md("2005", "QDD")
 #wiki2md("2006", "QDD")
 # wiki2md("2007", "QDD")
+wiki2md("2011", "项天鹰")
