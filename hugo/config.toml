@@ -7,5 +7,5 @@ hasCJKLanguage = true
 enableGitInfo = true
 
 [params]
-  gitRepo = "https://github.com/lzjluzijie/lgqm"
-  editURL = "https://github.com/lzjluzijie/lgqm/edit/master/hugo/content/"
+  gitRepo = "https://gitee.com/halulu/lgqm"
+  editURL = "https://gitee.com/halulu/lgqm/edit/master/hugo/content/"
