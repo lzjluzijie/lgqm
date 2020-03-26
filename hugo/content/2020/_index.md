@@ -1,5 +1,5 @@
 ---
-title: 澳宋gcd党史
+title: 澳宋共产党史
 aid: 2020
 author: 梦一场
 tags: 
