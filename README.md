@@ -4,7 +4,7 @@
 
 欢迎各位加入讨论群 
 - telegram 电报群(需要科学上网) https://t.me/lingaoqiming
-- QQ群：点击链接加入：https://jq.qq.com/?_wv=1027&k=5o3GCYt 或搜索QQ群号：[475191301](https://jq.qq.com/?_wv=1027&k=5o3GCYt)
+- QQ群：点击QQ群号加入：[475191301](https://jq.qq.com/?_wv=1027&k=5o3GCYt)
 
 目前提供起点的之前正文搬运，之后以同人搬运为主。萧主任现在除了起点还在[短书](https://chuiniu.duanshu.com/)更新，大家可以去支持一下正版，毕竟八块八就能都看一遍。本站提供的内容都是从互联网上搜集的，不是官方，没有版权。
 
