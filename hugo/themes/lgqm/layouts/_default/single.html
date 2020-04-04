@@ -3,7 +3,7 @@
 {{- partial "next.html" . -}}
 
 <article class="post">
-  <div class="content is-size-4">
+  <div class="content">
 <!--   	{{- partial "breadcrumb.html" . -}} -->
   	<h1 class="title has-text-centered">{{ .Title }}</h1>
   	<p class="subtitle has-text-centered">{{ if .Parent.Title }}<a href="{{ .Parent.Permalink }}" target="_blank">{{ .Parent.Title }}</a> | {{ end }}{{ $.Param "author" }} | 共 {{ .WordCount }} 字 | {{ .Lastmod.Format (.Site.Params.dateFormatToUse | default "2006-01-02") }} | {{ with .GitInfo }}<a href="{{ $.Site.Params.gitRepo }}/commit/{{ .Hash }} " title="{{ .Subject }}" target="_blank">{{ .AbbreviatedHash }}</a>{{ end }} | {{ with .File }}<a href="{{ $.Site.Params.editURL }}{{ replace .Dir '\\' '/' }}{{ .LogicalName }}" target="_blank">编辑本页</a>{{ end }}</p> </p>
