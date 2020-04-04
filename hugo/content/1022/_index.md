@@ -1,6 +1,6 @@
 ---
 title: 帝国化学工业传奇（第二部分 野望篇）
-aid: 2006
+aid: 1022
 author: QDD
 tags: 
  - 同人

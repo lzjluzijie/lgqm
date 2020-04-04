@@ -1,6 +1,6 @@
 ---
 title: 帝国化学工业传奇（第三部分 纵横篇）
-aid: 2007
+aid: 1024
 author: QDD
 tags: 
  - 同人

@@ -1,6 +1,6 @@
 ---
 title: 金晓宇高雄工作记
-aid: 2013
+aid: 1013
 author: 项天鹰
 tags: 
  - 同人

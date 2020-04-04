@@ -1,6 +1,6 @@
 ---
 title: 帝国化学工业传奇（第一部分 曙光篇）
-aid: 2005
+aid: 1021
 author: QDD
 tags: 
  - 同人
