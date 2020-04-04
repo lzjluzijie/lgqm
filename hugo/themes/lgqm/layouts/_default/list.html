@@ -1,4 +1,6 @@
 {{ define "main" -}}
+
+
 {{ $words := .WordCount }}{{ range .Pages }}{{ $words = add $words .WordCount }}{{ end }}
 
 <h1 class="title has-text-centered">{{ .Title }}</h1>
@@ -15,12 +17,25 @@
 
 <p class="content is-size-4">本卷共收录 {{ len .Pages }} 篇文章</p>
 
-<ul class="content is-size-4">
-{{ range .Pages.ByParam "zid" -}}
-  <li>
-    <span><a href="{{ .Permalink }}">{{ .Title }}</a></span>
-  </li>
-{{- end }}
-</ul>
+<table class="table is-fullwidth">
+  <thead>
+    <tr>
+      <th>文章</th>
+      <th>分卷</th>
+      <th>编号</th>
+      <th>作者</th>
+      <th>上次修改</th>
+    </tr>
+  </thead>
+  {{ range .Pages.ByParam "zid" }}
+  <tr>
+    <td><a href="{{ .Permalink }}">{{ .Title }}</a></td>
+    <td><a href="{{ .Parent.Permalink }}">{{ .Parent.Title }}</a></td>
+    <td>{{ printf "%04v.%v" (.Param "aid") (.Param "zid") }}</td>
+    <td>{{ .Param "author" }}</td>
+    <td>{{ .Lastmod.Format (.Site.Params.dateFormatToUse | default "2006-01-02") }}</td>
+  </tr>
+  {{- end }}
+
 
 {{- end }}
