@@ -17,11 +17,5 @@
 </br>
 
 <h2 class="title is-size-3">以下是已收录的章节列表，共 {{len .Site.RegularPages}} 篇</h2>
-<ul class="content is-size-4">
-{{ range .Site.RegularPages.ByParam "id" -}}
-  <li>
-    <span><a href="{{ .Permalink }}">{{ .Title }}</a></span>
-  </li>
-{{- end }}
-</ul>
+<!-- TODO 表格目录 -->
 {{- end }}

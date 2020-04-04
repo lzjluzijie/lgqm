@@ -13,12 +13,12 @@
 
 </br>
 
-<p class="content is-size-4">本章共收录 {{ len .Pages }} 篇文章</p>
+<p class="content is-size-4">本卷共收录 {{ len .Pages }} 篇文章</p>
 
 <ul class="content is-size-4">
-{{ range .Pages.ByParam "id" -}}
+{{ range .Pages.ByParam "zid" -}}
   <li>
-    <span><a href="{{ .Permalink }}"><!-- {{ printf "%04d" .Params.id }} -->{{ .Title }}</a></span>
+    <span><a href="{{ .Permalink }}">{{ .Title }}</a></span>
   </li>
 {{- end }}
 </ul>
