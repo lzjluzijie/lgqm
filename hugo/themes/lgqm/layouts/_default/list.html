@@ -20,18 +20,16 @@
 <table class="table is-fullwidth">
   <thead>
     <tr>
-      <th>文章</th>
-      <th>分卷</th>
       <th>编号</th>
+      <th>标题</th>
       <th>作者</th>
       <th>上次修改</th>
     </tr>
   </thead>
   {{ range .Pages.ByParam "zid" }}
   <tr>
-    <td><a href="{{ .Permalink }}">{{ .Title }}</a></td>
-    <td><a href="{{ .Parent.Permalink }}">{{ .Parent.Title }}</a></td>
     <td>{{ printf "%04v.%v" (.Param "aid") (.Param "zid") }}</td>
+    <td><a href="{{ .Permalink }}">{{ .Title }}</a></td>
     <td>{{ .Param "author" }}</td>
     <td>{{ .Lastmod.Format (.Site.Params.dateFormatToUse | default "2006-01-02") }}</td>
   </tr>
