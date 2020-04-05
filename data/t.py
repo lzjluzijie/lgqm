@@ -29,4 +29,5 @@ def wiki2md(aid, author):
 # wiki2md("2015", "项天鹰")
 # wiki2md("1006", "恶魔后花园")
 # wiki2md("1007", "恶魔后花园")
-wiki2md("1010", "聂义峰")
+# wiki2md("1010", "聂义峰")
+wiki2md("1008", "恶魔后花园")
