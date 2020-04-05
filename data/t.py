@@ -6,6 +6,14 @@ import re
 
 
 
+def download(url, path):
+    try:
+        urllib.request.urlretrieve(url, path)
+    except:
+        print("error! retry...")
+        download(url, path)
+
+
 def wiki2md(aid, author):
     f = open(aid + '.html', 'r', encoding='UTF-8')
     s = etree.HTML(f.read())
@@ -26,19 +34,25 @@ def wiki2md(aid, author):
                     url = e.get("src")
                     match = re.match(r'https:\/\/huiji-thumb\.huijistatic\.com\/lgqm\/uploads\/thumb\/([a-z0-9])\/([a-z0-9]{2})\/([-a-zA-Z0-9%_\.]*)\/[-a-zA-Z0-9%_\.]*', url)
                     if match:
+                        url = f"https://huiji-public.huijistatic.com/lgqm/uploads/{match.group(1)}/{match.group(2)}/{match.group(3)}"
                         name = urllib.parse.unquote(match.group(3))
-                        url = f"https://huiji-public.huijistatic.com/lgqm/uploads/{match.group(1)}/{match.group(2)}/{name}"
                     else:
                         name = urllib.parse.unquote(url[url.rfind("/")+1:])
                     print(url)
                     print(name)
-                    urllib.request.urlretrieve(url, os.path.join("./output", aid, name))
+                    # download(url, os.path.join("./output", aid, name))
                     f.write(f"![{name}](/{aid}/{name})\n\n")
                 else:
                     for c in e.iterchildren():
-                        helper(c)
+                        # 无视图片注释
+                        if c.get("class") == "thumbcaption":
+                            None
+                        else:
+                            helper(c)
                     if e.text is not None:
                         f.write(e.text)
+                        # 奇怪的问题，稍微处理一下
+                        if e.tail is not None: f.write(e.tail)
                         f.write("\n")
                 return
             helper(n)
