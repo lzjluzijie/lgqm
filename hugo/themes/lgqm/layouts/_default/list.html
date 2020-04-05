@@ -28,7 +28,11 @@
   </thead>
   {{ range .Pages.ByParam "zid" }}
   <tr>
-    <td>{{ printf "%04v.%v" (.Param "aid") (.Param "zid") }}</td>
+    {{ if eq (printf "%T" (.Param "zid")) "int"}}
+    <td>{{ printf "%04v-%04d" (.Param "aid") (.Param "zid") }}</td>
+    {{ else }}
+    <td>{{ printf "%04v-%07.2f" (.Param "aid") (.Param "zid") }}</td>
+    {{ end }}
     <td><a href="{{ .Permalink }}">{{ .Title }}</a></td>
     <td>{{ .Param "author" }}</td>
     <td>{{ .Lastmod.Format (.Site.Params.dateFormatToUse | default "2006-01-02") }}</td>

@@ -3,7 +3,7 @@
   	{{ with $pages.Next .}}
   	<div class="level-item has-text-centered">
   		<div>
-      		<p class="subtitle">上一章</p>
+      		<p class="subtitle">上一章 {{ cond (eq (printf "%T" (.Param "zid")) "int") (printf "%04v-%04d" (.Param "aid") (.Param "zid")) (printf "%04v-%07.2f" (.Param "aid") (.Param "zid")) }}</p>
       		<a class="title" href="{{ .Permalink }}">{{ .Title }}</a>
       	</div>
   	</div>
@@ -19,7 +19,7 @@
   	{{ with $pages.Prev .}}
   	<div class="level-item has-text-centered">
   		<div>
-      		<p class="subtitle">下一章</p>
+      		<p class="subtitle">下一章 {{ cond (eq (printf "%T" (.Param "zid")) "int") (printf "%04v-%04d" (.Param "aid") (.Param "zid")) (printf "%04v-%07.2f" (.Param "aid") (.Param "zid")) }}</p>
       		<a class="title" href="{{ .Permalink }}">{{ .Title }}</a>
       	</div>
   	</div>

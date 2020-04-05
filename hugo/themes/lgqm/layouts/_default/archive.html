@@ -43,7 +43,7 @@
     {{ range .Site.Sections.ByParam "aid" }}
     {{ range .Pages.ByParam "zid" }}
     <tr>
-      <td>{{ printf "%04v.%v" (.Param "aid") (.Param "zid") }}</td>
+      <td>{{ cond (eq (printf "%T" (.Param "zid")) "int") (printf "%04v-%04d" (.Param "aid") (.Param "zid")) (printf "%04v-%07.2f" (.Param "aid") (.Param "zid")) }}</td>
       <td><a href="{{ .Permalink }}">{{ .Title }}</a></td>
       <td><a href="{{ .Parent.Permalink }}">{{ .Parent.Title }}</a></td>
       <td>{{ .Param "author" }}</td>
