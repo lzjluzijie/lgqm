@@ -15,6 +15,16 @@
 
 </br>
 
+{{ if eq (len .Pages) 1}}
+
+<article class="post">
+    <div class="content">
+    {{ (index .Pages 0).Content }}
+    </div>
+</article>
+
+{{ else }}
+
 <p class="content is-size-4">本卷共收录 {{ len .Pages }} 篇文章</p>
 
 <table class="table is-fullwidth">
@@ -39,5 +49,6 @@
   </tr>
   {{- end }}
 
+{{ end }}
 
 {{- end }}
