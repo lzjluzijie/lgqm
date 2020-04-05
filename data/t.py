@@ -15,6 +15,8 @@ def download(url, path):
 
 
 def wiki2md(aid, author):
+    if not os.path.exists(os.path.join("./output", aid)): os.mkdir(os.path.join("./output", aid))
+
     f = open(aid + '.html', 'r', encoding='UTF-8')
     s = etree.HTML(f.read())
 
@@ -40,6 +42,7 @@ def wiki2md(aid, author):
                         name = urllib.parse.unquote(url[url.rfind("/")+1:])
                     print(url)
                     print(name)
+                    # 顺序下载图片，遇到错误无限重试
                     # download(url, os.path.join("./output", aid, name))
                     f.write(f"![{name}](/{aid}/{name})\n\n")
                 else:
@@ -53,7 +56,7 @@ def wiki2md(aid, author):
                         f.write(e.text)
                         # 奇怪的问题，稍微处理一下
                         if e.tail is not None: f.write(e.tail)
-                        f.write("\n")
+                        f.write("\n\n")
                 return
             helper(n)
             
@@ -68,4 +71,5 @@ def wiki2md(aid, author):
 # wiki2md("1006", "恶魔后花园")
 # wiki2md("1007", "恶魔后花园")
 # wiki2md("1010", "聂义峰")
-wiki2md("1008", "恶魔后花园")
+# wiki2md("1008", "恶魔后花园")
+wiki2md("1031", "马尼拉谍影")
