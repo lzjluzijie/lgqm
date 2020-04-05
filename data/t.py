@@ -7,13 +7,13 @@ def wiki2md(aid, author):
 
     s = s[0][0]
 
-    t = '---\naid: ' + aid + '\nzid: %d\ntitle: ' + aid + '.%04d-%s\nauthor: ' + author + '\n---\n\n'
+    t = '---\naid: ' + aid + '\nzid: %d\ntitle: %s\nauthor: ' + author + '\n---\n\n'
 
     zid = 1
     for n in s:
         if n.tag == "h2":
             f = open("output/" + aid + "/%04d.md" % zid, "w", encoding='UTF-8')
-            f.write(t % (zid, zid, n[0].text))
+            f.write(t % (zid, n[0].text))
             zid = zid + 1
         else:
             if n.text is not None:
@@ -26,4 +26,5 @@ def wiki2md(aid, author):
 #wiki2md("2006", "QDD")
 # wiki2md("2007", "QDD")
 # wiki2md("2011", "项天鹰")
-wiki2md("2015", "项天鹰")
+# wiki2md("2015", "项天鹰")
+wiki2md("1025", "恶魔后花园")
