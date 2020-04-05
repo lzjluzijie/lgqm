@@ -1,4 +1,9 @@
 from lxml import etree
+import urllib.request
+import urllib.parse
+import os
+import re
+
 
 
 def wiki2md(aid, author):
@@ -12,13 +17,32 @@ def wiki2md(aid, author):
     zid = 1
     for n in s:
         if n.tag == "h2":
-            f = open("output/" + aid + "/%04d.md" % zid, "w", encoding='UTF-8')
+            f = open(os.path.join("./output/", aid, "%04d.md" % zid), "w", encoding='UTF-8')
             f.write(t % (zid, n[0].text))
             zid = zid + 1
         else:
-            if n.text is not None:
-                f.write(n.text)
-                f.write("\n")
+            def helper(e):
+                if e.tag == "img":
+                    url = e.get("src")
+                    match = re.match(r'https:\/\/huiji-thumb\.huijistatic\.com\/lgqm\/uploads\/thumb\/([a-z0-9])\/([a-z0-9]{2})\/([-a-zA-Z0-9%_\.]*)\/[-a-zA-Z0-9%_\.]*', url)
+                    if match:
+                        name = urllib.parse.unquote(match.group(3))
+                        url = f"https://huiji-public.huijistatic.com/lgqm/uploads/{match.group(1)}/{match.group(2)}/{name}"
+                    else:
+                        name = urllib.parse.unquote(url[url.rfind("/")+1:])
+                    print(url)
+                    print(name)
+                    urllib.request.urlretrieve(url, os.path.join("./output", aid, name))
+                    f.write(f"![{name}](/{aid}/{name})\n\n")
+                else:
+                    for c in e.iterchildren():
+                        helper(c)
+                    if e.text is not None:
+                        f.write(e.text)
+                        f.write("\n")
+                return
+            helper(n)
+            
 
 
 #wiki2md("2004", "社会主义螺丝刀")
