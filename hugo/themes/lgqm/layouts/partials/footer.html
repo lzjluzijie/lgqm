@@ -8,6 +8,27 @@
 		nav.classList.toggle('is-active');
 		});
 	})();
+
+	var size = localStorage.getItem('size');
+	if (size == null) {
+		size = 5
+		localStorage.setItem('size', size);
+	}
+	document.documentElement.className = "is-size-" + size
+	document.getElementById("button-size-dec").addEventListener("click", function(){
+		if (size <= 6) {
+			size++
+			localStorage.setItem('size', size);
+			document.documentElement.className = "is-size-" + size
+		}
+	})
+	document.getElementById("button-size-inc").addEventListener("click", function(){
+		if (size >= 2) {
+			size--
+			localStorage.setItem('size', size);
+			document.documentElement.className = "is-size-" + size
+		}
+	})
 </script>
 
 <!-- Global site tag (gtag.js) - Google Analytics -->
