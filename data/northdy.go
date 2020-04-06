@@ -9,6 +9,7 @@ import (
 	"os"
 	"text/template"
 	"time"
+
 )
 
 /*
@@ -54,13 +55,15 @@ const TimeLayout = "2006-01-02 15:04"
 const Northdy = `---
 aid: 9025
 zid: {{ .Tid }}
-title: {{ .Title }}
-author: {{ .Author }}
+title: '{{ .Title }}'
+author: {{ .Username }}
+date: {{ .PostTime.Format "2006-01-02 15:04:05+07:00"  }}
+lastmod: {{ .LastPostTime.Format "2006-01-02 15:04:05+07:00"  }}
 ---
 
 {{ range .Posts }}
 
-{{ .Username }} 于 {{ .PostTimeString }} 发表评论：
+{{ .Username }} 于 {{ .PostTimeString }} 发表了：
 
 {{ .Content }}
 
@@ -78,6 +81,22 @@ func init() {
 	}
 
 	tc = t
+
+	// 存在大量无效的站内图片，直接无视掉
+	html2md.AddRule("img", &html2md.Rule{
+		Patterns:    []string{"img"},
+		Tp:          0,
+		Replacement: func(innerHTML string, attrs []string) string {
+			return ""
+		},
+	})
+	html2md.AddRule("a", &html2md.Rule{
+		Patterns:    []string{"a"},
+		Tp:          0,
+		Replacement: func(innerHTML string, attrs []string) string {
+			return innerHTML
+		},
+	})
 }
 
 func exec(thread *Thread) {
@@ -124,7 +143,7 @@ func loadUsers() (users map[int]string) {
 	return
 }
 
-func jsonl() (threads []*Thread)  {
+func jsonl() {
 	users := loadUsers()
 
 	beijing := time.FixedZone("北京时间", int((8 * time.Hour).Seconds()))
@@ -135,7 +154,7 @@ func jsonl() (threads []*Thread)  {
 	}
 
 	r := bufio.NewReader(f)
-	threads = make([]*Thread, 0)
+	threads := make([]*Thread, 0)
 
 	for {
 		//ReadLine 有问题
@@ -184,26 +203,23 @@ func jsonl() (threads []*Thread)  {
 			}
 
 			pts.PostTime = pt
-			pts.Username = users[t.Author]
-			if t.Tid == 787250 {
-				pts.Content = html2md.Convert(pts.Content)
-			}
+			pts.Username = users[pts.Uid]
+			pts.Content = html2md.Convert(pts.Content)
 		}
 
 		//fmt.Println(t.Tid)
 		//fmt.Println(t.Title)
 		//fmt.Println(t.PostTime)
 
+		exec(t)
 		threads = append(threads, t)
 	}
 
+	fmt.Println(len(threads))
 	return
 }
 
 func main() {
 	//fmt.Println(loadUsers())
-	threads := jsonl()
-	fmt.Println(threads[0].Posts[0].Content)
-	fmt.Println(html2md.Convert(threads[0].Posts[0].Content))
-	exec(threads[0])
+	jsonl()
 }

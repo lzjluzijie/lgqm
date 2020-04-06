@@ -41,6 +41,8 @@
       </tr>
     </thead>
     {{ range .Site.Sections.ByParam "aid" }}
+    {{ if eq (.Param "aid") 9025}}
+    {{ else }}
     {{ range .Pages.ByParam "zid" }}
     <tr>
       <td>{{ cond (eq (printf "%T" (.Param "zid")) "int") (printf "%04v-%04d" (.Param "aid") (.Param "zid")) (printf "%04v-%07.2f" (.Param "aid") (.Param "zid")) }}</td>
@@ -49,6 +51,7 @@
       <td>{{ .Param "author" }}</td>
       <td>{{ .Lastmod.Format (.Site.Params.dateFormatToUse | default "2006-01-02") }}</td>
     </tr>
+    {{- end }}
     {{- end }}
     {{- end }}
 </table>
