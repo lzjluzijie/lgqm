@@ -2,10 +2,12 @@ package main
 
 import (
 	"bufio"
+	"bytes"
+	"encoding/gob"
 	"encoding/json"
 	"fmt"
+	"io"
 	"os"
-	"strings"
 	"time"
 )
 
@@ -35,12 +37,13 @@ type Thread struct {
 
 	PostTime     time.Time
 	LastPostTime time.Time
-	Posts        []Post
+	Posts        []*Post
 }
 
-const TimeLayout = "2006-1-2 15:04:05"
+const PostTimeLayout = "2006-1-2 15:04:05"
+const LastPostTimeLayout = "2006-1-2 15:04"
 
-func main() {
+func jsonl()  {
 	beijing := time.FixedZone("北京时间", int((8 * time.Hour).Seconds()))
 
 	f, err := os.Open("thread.jsonl")
@@ -49,13 +52,17 @@ func main() {
 	}
 
 	r := bufio.NewReader(f)
+	threads := make([]*Thread, 0)
+
 	for {
 		//ReadLine 有问题
 		l, err := r.ReadString('\n')
-		if err != nil {
+		if err == io.EOF {
+			break
+		} else if err != nil {
 			panic(err)
 		}
-		l = strings.ReplaceAll(l, "&nbsp", " ")
+		//l = strings.ReplaceAll(l, "&nbsp", " ")
 		//fmt.Println(l)
 
 		t := new(Thread)
@@ -65,19 +72,51 @@ func main() {
 		}
 
 		// 处理一下
-		if t.Title == "已删" || t.Title == "删不掉帖子，编辑了" || t.Title == "“立春”号首任舰长爆照啦" {
+		//if t.Title == "已删" || t.Title == "删不掉帖子，编辑了" || t.Title == "“立春”号首任舰长爆照啦" {
+		//	continue
+		//}
+		if len(t.PostTimeString)<=10 {
+			fmt.Println(t.Title)
 			continue
 		}
 
-		pt, err := time.ParseInLocation(TimeLayout, t.PostTimeString, beijing)
+		pt, err := time.ParseInLocation(PostTimeLayout, t.PostTimeString, beijing)
 		if err != nil {
 			panic(err)
 		}
-
 		t.PostTime = pt
+
+		lpt, err := time.ParseInLocation(LastPostTimeLayout, t.LastPostTimeString, beijing)
+		if err != nil {
+			panic(err)
+		}
+		t.LastPostTime = lpt
+
+		for _, pts := range t.Posts {
+			pt, err := time.ParseInLocation(PostTimeLayout, pts.PostTimeString, beijing)
+			if err != nil {
+				panic(err)
+			}
+
+			pts.PostTime = pt
+		}
 
 		fmt.Println(t.Title)
 		fmt.Println(t.PostTime)
-		fmt.Println(t.Posts[0].Uid)
+
+		threads = append(threads, t)
 	}
+
+	var buf bytes.Buffer
+	enc := gob.NewEncoder(&buf)
+	err = enc.Encode(threads)
+	if err != nil {
+		panic(err)
+	}
+
+	fmt.Println(buf.Len())
+}
+
+func main() {
+	jsonl()
 }
