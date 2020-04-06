@@ -10,8 +10,8 @@
     {{ else }}
     <div class="level-item has-text-centered">
       <div>
-          <p class="subtitle">返回</p>
-          <a class="title" href="{{ .Parent.Permalink }}">{{ .Parent.Params.aid }}-{{ .Parent.Title }}</a>
+          <p class="subtitle">返回 {{ printf "%04v" .Parent.Params.aid }}</p>
+          <a class="title" href="{{ .Parent.Permalink }}">{{ .Parent.Title }}</a>
         </div>
     </div>
   	{{ end }}
