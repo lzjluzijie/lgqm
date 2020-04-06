@@ -17,7 +17,7 @@ type Volume struct {
 type Chapter struct {
 	Aid     int
 	Zid     int
-	Uid	int
+	Uid     int
 	Title   string
 	Author  string
 	Tags    []string
@@ -42,8 +42,8 @@ tags: {{ range $tag := .Tags }}
 
 var tc *template.Template
 
-func init()  {
-	t,  err := template.New("chapter").Parse(mc)
+func init() {
+	t, err := template.New("chapter").Parse(mc)
 	if err != nil {
 		panic(err)
 	}
@@ -191,9 +191,9 @@ func d1() {
 		cs = append(cs, c)
 	}
 
-	sort.SliceStable(cs, func(i, j int) bool { return cs[i].Aid<cs[j].Aid || (cs[i].Aid==cs[j].Aid && cs[i].Zid<cs[j].Zid)})
+	sort.SliceStable(cs, func(i, j int) bool { return cs[i].Aid < cs[j].Aid || (cs[i].Aid == cs[j].Aid && cs[i].Zid < cs[j].Zid) })
 
-	for _, c := range cs{
+	for _, c := range cs {
 		c.Uid = uid
 		output(c)
 		uid++
@@ -246,7 +246,7 @@ func d2() {
 			cs = append(cs, Chapter{
 				Aid:     7,
 				Zid:     id,
-				Uid: uid,
+				Uid:     uid,
 				Title:   title,
 				Author:  "吹牛者",
 				Tags:    []string{"正文"},
@@ -314,7 +314,7 @@ func d3() {
 			cs = append(cs, Chapter{
 				Aid:     8,
 				Zid:     id,
-				Uid: uid,
+				Uid:     uid,
 				Title:   title,
 				Author:  "吹牛者",
 				Tags:    []string{"正文"},
@@ -362,8 +362,6 @@ func h1() {
 	}
 }
 
-
-
 func txt() {
 	t, err := os.Create("临高启明-精校版-Halulu.txt")
 	if err != nil {
@@ -394,7 +392,7 @@ func txt() {
 			}
 
 			ds := strings.SplitAfterN(string(data), "\n", 14)
-			_, err = t.WriteString(ds[4][7:]+"\n"+ds[13])
+			_, err = t.WriteString(ds[4][7:] + "\n" + ds[13])
 			if err != nil {
 				panic(err)
 			}
