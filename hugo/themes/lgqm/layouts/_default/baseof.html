@@ -7,7 +7,7 @@
     	{{ if .IsHome -}}
   		<title>{{ .Site.Title }}</title>
   		{{- else -}}
-  		<title>{{ .Title }} {{ if .Parent.Title }}· {{ .Parent.Title }}{{ end }}· {{ .Site.Title }}</title>
+  		<title>{{ .Title }} {{ if .Parent.Title }}· {{ .Parent.Title }} {{ end }}· {{ .Site.Title }}</title>
   		{{- end }}
 
 		{{- partial "head.html" . -}}
