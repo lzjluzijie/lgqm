@@ -3,7 +3,7 @@
 
 {{ $words := .WordCount }}{{ range .Pages }}{{ $words = add $words .WordCount }}{{ end }}
 
-<h1 class="title has-text-centered">{{ .Title }}</h1>
+<h1 class="title has-text-centered">{{ .Param "aid" }} {{ .Title }}</h1>
 
 <p class="subtitle has-text-centered">{{ $.Param "author" }} | 共 {{ $words }} 字 | {{ .Lastmod.Format (.Site.Params.dateFormatToUse | default "2006-01-02") }} | {{ with .GitInfo }}<a href="{{ $.Site.Params.gitRepo }}/commit/{{ .Hash }} " title="{{ .Subject }}" target="_blank">{{ .AbbreviatedHash }}</a>{{ end }} | {{ with .File }}<a href="{{ $.Site.Params.editURL }}{{ replace .Dir '\\' '/' }}{{ .LogicalName }}" target="_blank">编辑本页</a>{{ end }}</p>
 
@@ -38,11 +38,8 @@
   </thead>
   {{ range .Pages.ByParam "zid" }}
   <tr>
-    {{ if eq (printf "%T" (.Param "zid")) "int"}}
-    <td>{{ printf "%04v-%04d" (.Param "aid") (.Param "zid") }}</td>
-    {{ else }}
-    <td>{{ printf "%04v-%07.2f" (.Param "aid") (.Param "zid") }}</td>
-    {{ end }}
+    {{ $bh := printf (cond (eq (printf "%T" (.Param "zid")) "int") "%04v-%04d" "%04v-%07.2f") (.Param "aid") (.Param "zid") }}
+    <td>{{ $bh }}</td>
     <td><a href="{{ .Permalink }}">{{ .Title }}</a></td>
     <td>{{ .Param "author" }}</td>
     <td>{{ .Lastmod.Format (.Site.Params.dateFormatToUse | default "2006-01-02") }}</td>
