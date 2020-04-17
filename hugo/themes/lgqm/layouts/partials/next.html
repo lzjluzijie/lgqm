@@ -1,34 +1,26 @@
 {{ $pages := .Parent.RegularPages.ByParam "zid" }}
-<nav class="level" style="padding: 20px;">
-  	{{ with $pages.Next .}}
-  	<div class="level-item has-text-centered">
+<nav class="columns" style="padding: 20px;">
+  	<div class="column has-text-centered">
   		<div>
+          {{ with $pages.Next .}}
       		<p class="subtitle">上一章 {{ cond (eq (printf "%T" (.Param "zid")) "int") (printf "%04v-%04d" (.Param "aid") (.Param "zid")) (printf "%04v-%07.2f" (.Param "aid") (.Param "zid")) }}</p>
       		<a class="title" href="{{ .Permalink }}">{{ .Title }}</a>
-      	</div>
-  	</div>
-    {{ else }}
-    <div class="level-item has-text-centered">
-      <div>
+          {{ else }}
           <p class="subtitle">返回 {{ printf "%04v" .Parent.Params.aid }}</p>
           <a class="title" href="{{ .Parent.Permalink }}">{{ .Parent.Title }}</a>
-        </div>
-    </div>
-  	{{ end }}
-
-  	{{ with $pages.Prev .}}
-  	<div class="level-item has-text-centered">
-  		<div>
-      		<p class="subtitle">下一章 {{ cond (eq (printf "%T" (.Param "zid")) "int") (printf "%04v-%04d" (.Param "aid") (.Param "zid")) (printf "%04v-%07.2f" (.Param "aid") (.Param "zid")) }}</p>
-      		<a class="title" href="{{ .Permalink }}">{{ .Title }}</a>
+          {{ end }}
       	</div>
   	</div>
-    {{ else }}
-    <div class="level-item has-text-centered">
-      <div>
+  	
+  	<div class="column has-text-centered">
+  		<div>
+          {{ with $pages.Prev .}}
+      		<p class="subtitle">下一章 {{ cond (eq (printf "%T" (.Param "zid")) "int") (printf "%04v-%04d" (.Param "aid") (.Param "zid")) (printf "%04v-%07.2f" (.Param "aid") (.Param "zid")) }}</p>
+      		<a class="title" href="{{ .Permalink }}">{{ .Title }}</a>
+          {{ else }}
           <p class="subtitle">已到本卷末尾</p>
           <a class="title" href="/archive">返回目录</a>
-        </div>
-    </div>
-    {{ end }}
+          {{ end }}
+      	</div>
+  	</div>
 </nav>
