@@ -9,3 +9,6 @@ enableGitInfo = true
 [params]
   gitRepo = "https://gitee.com/halulu/lgqm"
   editURL = "https://gitee.com/halulu/lgqm/edit/master/hugo/content/"
+
+[frontmatter]
+  lastmod = ["lastmod", ":git"]
