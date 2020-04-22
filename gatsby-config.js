@@ -3,6 +3,7 @@ module.exports = {
     title: `临高启明公开图书馆`,
     description: `临高启明公开图书馆`,
     author: `halulu`,
+    siteUrl: `https://lgqm.halu.lu`,
   },
   plugins: [
     `gatsby-plugin-sass`,
@@ -42,6 +43,7 @@ module.exports = {
         trackingId: `UA-91028451-14`,
       },
     },
+    `gatsby-plugin-sitemap`,
     // this (optional) plugin enables Progressive Web App + Offline functionality
     // To learn more, visit: https://gatsby.dev/offline
     // `gatsby-plugin-offline`,

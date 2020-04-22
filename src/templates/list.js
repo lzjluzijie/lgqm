@@ -64,7 +64,6 @@ export const query = graphql`
       sort: { fields: frontmatter___zid }
     ) {
       nodes {
-        html
         frontmatter {
           zid
           title
