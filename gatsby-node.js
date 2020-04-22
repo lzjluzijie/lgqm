@@ -33,6 +33,12 @@ exports.onCreateNode = ({ node, getNode, actions }) => {
 
     createNodeField({
       node,
+      name: `path`,
+      value: file.relativePath,
+    })
+
+    createNodeField({
+      node,
       name: `type`,
       value: type,
     })

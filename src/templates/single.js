@@ -3,6 +3,7 @@ import { graphql, Link } from "gatsby"
 import Layout from "../components/layout"
 import SEO from "../components/seo"
 import Next from "../components/next"
+import Git from "../components/git"
 
 export default ({ data, pageContext }) => (
   <Layout>
@@ -24,6 +25,8 @@ export default ({ data, pageContext }) => (
         {data.markdownRemark.frontmatter.author}
         {" | "}
         {new Date(data.markdownRemark.fields.lastmod).toLocaleDateString()}
+        {" | "}
+        <Git path={data.markdownRemark.fields.path}></Git>
       </p>
       <div dangerouslySetInnerHTML={{ __html: data.markdownRemark.html }} />
     </article>
@@ -47,6 +50,8 @@ export const query = graphql`
       }
       fields {
         lastmod
+        slug
+        path
       }
     }
   }

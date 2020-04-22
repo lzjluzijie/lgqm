@@ -2,9 +2,14 @@ import React from "react"
 import { graphql, Link } from "gatsby"
 import Layout from "../components/layout"
 import SEO from "../components/seo"
+import Git from "../components/git"
 
 const id = (aid, zid) =>
-  `${aid.toString().padStart(4, `0`)}.${zid.toString().padStart(4, `0`)}`
+  `${aid.toString().padStart(4, `0`)}.${
+    zid % 1 === 0
+      ? zid.toString().padStart(4, `0`)
+      : zid.toFixed(2).padStart(7, `0`)
+  }`
 
 // const formatTime = (time) => `${time.getFullYear()}${time.getMonth()}${time.getDay()}`
 
@@ -15,12 +20,20 @@ export default ({ data }) => (
       <h1 className={"title has-text-centered"}>
         {data.markdownRemark.frontmatter.title}
       </h1>
+      <p className={"subtitle has-text-centered"}>
+        {data.markdownRemark.frontmatter.author}
+        {" | "}
+        {new Date(data.markdownRemark.fields.lastmod).toLocaleDateString()}
+        {" | "}
+        <Git path={data.markdownRemark.fields.path}></Git>
+      </p>
       <div dangerouslySetInnerHTML={{ __html: data.markdownRemark.html }} />
     </article>
     {data.allMarkdownRemark.nodes.length !== 0 && (
       <>
-        <p className="content is-size-4">
+        <p className="subtitle">
           本卷共收录 {data.allMarkdownRemark.nodes.length} 篇文章
+          <span className="has-text-right">111</span>
         </p>
         <table className="table is-fullwidth">
           <thead>
@@ -66,8 +79,8 @@ export const query = graphql`
           author
         }
         fields {
-          slug
           lastmod
+          slug
         }
       }
     }
@@ -77,6 +90,10 @@ export const query = graphql`
         aid
         title
         author
+      }
+      fields {
+        lastmod
+        path
       }
     }
   }
