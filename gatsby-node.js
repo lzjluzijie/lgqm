@@ -60,6 +60,8 @@ exports.createPages = async ({ graphql, actions }) => {
     }
   `)
 
+  if (listResult.errors) throw listResult.errors
+
   let lists = new Map()
 
   listResult.data.allMarkdownRemark.edges.forEach(({ node }) => {
@@ -86,9 +88,11 @@ exports.createPages = async ({ graphql, actions }) => {
           node {
             fields {
               slug
+              type
             }
             frontmatter {
               aid
+              title
             }
           }
         }
@@ -96,8 +100,23 @@ exports.createPages = async ({ graphql, actions }) => {
     }
   `)
 
-  singleResult.data.allMarkdownRemark.edges.forEach(({ node }) => {
-    // console.log(lists.get(node.frontmatter.aid))
+  if (singleResult.errors) throw singleResult.errors
+
+  const singles = singleResult.data.allMarkdownRemark.edges
+  singles.forEach((post, index) => {
+    const node = post.node
+
+    const parent = lists.get(node.frontmatter.aid)
+    const prev =
+      index === 0 ||
+      node.frontmatter.aid !== singles[index - 1].node.frontmatter.aid
+        ? null
+        : singles[index - 1].node
+    const next =
+      index === singles.length - 1 ||
+      node.frontmatter.aid !== singles[index + 1].node.frontmatter.aid
+        ? null
+        : singles[index + 1].node
 
     createPage({
       path: node.fields.slug,
@@ -106,7 +125,9 @@ exports.createPages = async ({ graphql, actions }) => {
         aid: node.frontmatter.aid,
         zid: node.frontmatter.zid,
         slug: node.fields.slug,
-        parent: lists.get(node.frontmatter.aid),
+        parent,
+        prev,
+        next,
       },
     })
   })
