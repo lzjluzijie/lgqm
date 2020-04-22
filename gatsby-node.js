@@ -6,21 +6,30 @@ exports.onCreateNode = ({ node, getNode, actions }) => {
   const { createNodeField } = actions
 
   if (node.internal.type === `MarkdownRemark`) {
-    const isList = getNode(node.parent).base === `_index.md`
+    const file = getNode(node.parent)
+    const isList = file.base === `_index.md`
     const type = isList ? `list` : `single`
     const slug = isList
-      ? `/${getNode(node.parent).relativeDirectory}/`
+      ? `/${file.relativeDirectory}/`
       : createFilePath({ node, getNode })
 
-    // let time = node.frontmatter.lastmod
-    // if (time === undefined) {
-    // }
+    let time = node.frontmatter.lastmod
+    if (time === undefined) {
+      const { stdout } = execa.sync(`git`, [
+        `log`,
+        `-1`,
+        `--pretty=format:%aI`,
+        file.absolutePath,
+      ])
+      // console.log(stdout)
+      time = stdout
+    }
 
-    // createNodeField({
-    //   node,
-    //   name: `lastmod`,
-    //   value: time,
-    // })
+    createNodeField({
+      node,
+      name: `lastmod`,
+      value: +new Date(time),
+    })
 
     createNodeField({
       node,

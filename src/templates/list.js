@@ -6,6 +6,8 @@ import SEO from "../components/seo"
 const id = (aid, zid) =>
   `${aid.toString().padStart(4, `0`)}.${zid.toString().padStart(4, `0`)}`
 
+// const formatTime = (time) => `${time.getFullYear()}${time.getMonth()}${time.getDay()}`
+
 export default ({ data }) => (
   <Layout>
     <SEO title={data.markdownRemark.frontmatter.title} />
@@ -37,7 +39,7 @@ export default ({ data }) => (
                   <Link to={node.fields.slug}>{node.frontmatter.title}</Link>
                 </td>
                 <td>{node.frontmatter.author}</td>
-                <td>todo</td>
+                <td>{new Date(node.fields.lastmod).toLocaleDateString()}</td>
               </tr>
             ))}
           </tbody>
@@ -65,6 +67,7 @@ export const query = graphql`
         }
         fields {
           slug
+          lastmod
         }
       }
     }

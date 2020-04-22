@@ -12,7 +12,7 @@ const List = ({ node, length }) => (
     </td>
     <td>{node.frontmatter.author}</td>
     <td>{length}</td>
-    <td>todo</td>
+    <td>{new Date(node.fields.lastmod).toLocaleDateString()}</td>
   </tr>
 )
 
@@ -69,6 +69,7 @@ export const query = graphql`
           fields {
             type
             slug
+            lastmod
           }
         }
         totalCount
