@@ -17,7 +17,6 @@ export default class Navbar extends React.Component {
           <strong>临高启明</strong>
         </Link>
         <button
-          role="button"
           className={`button navbar-burger burger ${
             this.activeMenu ? "is-active" : ""
           }`}
@@ -43,11 +42,7 @@ export default class Navbar extends React.Component {
           <Link className="navbar-item" to="/0000/">
             指南
           </Link>
-          <a
-            className="navbar-item"
-            href="https://t.me/lingaoqiming"
-            target="_blank"
-          >
+          <a className="navbar-item" href="https://t.me/lingaoqiming">
             讨论群
           </a>
           <div className="navbar-item has-dropdown is-hoverable">
@@ -57,35 +52,18 @@ export default class Navbar extends React.Component {
             <div className="navbar-dropdown">
               <a
                 className="navbar-item"
-                rel="noopener"
                 href="https://book.qidian.com/info/1262627"
-                target="_blank"
               >
                 起点
               </a>
-              <a
-                className="navbar-item"
-                rel="noopener"
-                href="https://chuiniu.duanshu.com/"
-                target="_blank"
-              >
+              <a className="navbar-item" href="https://chuiniu.duanshu.com/">
                 短书
               </a>
               <hr className="navbar-divider" />
-              <a
-                className="navbar-item"
-                rel="noopener"
-                href="https://www.lgqm.gq/"
-                target="_blank"
-              >
+              <a className="navbar-item" href="https://www.lgqm.gq/">
                 论坛
               </a>
-              <a
-                className="navbar-item"
-                rel="noopener"
-                href="https://lgqm.huijiwiki.com/"
-                target="_blank"
-              >
+              <a className="navbar-item" href="https://lgqm.huijiwiki.com/">
                 Wiki
               </a>
             </div>
@@ -103,7 +81,6 @@ export default class Navbar extends React.Component {
               <a
                 className="button is-primary"
                 href="https://gitee.com/halulu/lgqm"
-                target="_blank"
               >
                 Git
               </a>
