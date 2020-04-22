@@ -33,7 +33,13 @@ module.exports = {
         background_color: `#ffe500`,
         theme_color: `#ffe500`,
         display: `minimal-ui`,
-        icon: `src/images/icon.png`, // This path is relative to the root of the site.
+        icon: `src/images/icon.png`,
+      },
+    },
+    {
+      resolve: `gatsby-plugin-google-analytics`,
+      options: {
+        trackingId: `UA-91028451-14`,
       },
     },
     // this (optional) plugin enables Progressive Web App + Offline functionality
