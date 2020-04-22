@@ -19,9 +19,10 @@ export default ({ data, pageContext }) => {
         <h1 className={"title has-text-centered"}>{post.frontmatter.title}</h1>
         <p className={"subtitle has-text-centered"}>
           <Link to={pageContext.parent.fields.slug}>
-            {pageContext.parent.frontmatter.title}{" "}
+            {pageContext.parent.frontmatter.title}
           </Link>
-          | {post.frontmatter.author}
+          {" | "}
+          {post.frontmatter.author}
         </p>
         <div dangerouslySetInnerHTML={{ __html: post.html }} />
       </article>

@@ -15,14 +15,7 @@ export default ({ data }) => (
       </h1>
       <div dangerouslySetInnerHTML={{ __html: data.markdownRemark.html }} />
     </article>
-    {data.allMarkdownRemark.nodes.length === 1 ? (
-      <article
-        className={"post content"}
-        dangerouslySetInnerHTML={{
-          __html: data.allMarkdownRemark.nodes[0].html,
-        }}
-      ></article>
-    ) : (
+    {data.allMarkdownRemark.nodes.length !== 0 && (
       <>
         <p className="content is-size-4">
           本卷共收录 {data.allMarkdownRemark.nodes.length} 篇文章
@@ -78,7 +71,9 @@ export const query = graphql`
     markdownRemark(fields: { slug: { eq: $slug } }) {
       html
       frontmatter {
+        aid
         title
+        author
       }
     }
   }
