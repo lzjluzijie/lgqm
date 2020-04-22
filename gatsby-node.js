@@ -6,11 +6,11 @@ exports.onCreateNode = ({ node, getNode, actions }) => {
   const { createNodeField } = actions
 
   if (node.internal.type === `MarkdownRemark`) {
-    const type = getNode(node.parent).base === `_index.md` ? `list` : `single`
-    const slug =
-      getNode(node.parent).base === `_index.md`
-        ? `/${getNode(node.parent).relativeDirectory}/`
-        : createFilePath({ node, getNode })
+    const isList = getNode(node.parent).base === `_index.md`
+    const type = isList ? `list` : `single`
+    const slug = isList
+      ? `/${getNode(node.parent).relativeDirectory}/`
+      : createFilePath({ node, getNode })
 
     // let time = node.frontmatter.lastmod
     // if (time === undefined) {
@@ -64,9 +64,10 @@ exports.createPages = async ({ graphql, actions }) => {
 
   const lists = new Map()
 
-  listResult.data.allMarkdownRemark.edges.forEach(({ node }) =>
+  listResult.data.allMarkdownRemark.edges.forEach(({ node }) => {
+    node.singles = new Array()
     lists.set(node.frontmatter.aid, node)
-  )
+  })
 
   const singleResult = await graphql(`
     query {
@@ -97,6 +98,8 @@ exports.createPages = async ({ graphql, actions }) => {
     const node = post.node
 
     const parent = lists.get(node.frontmatter.aid)
+    parent.singles.push(node)
+
     const prev =
       index === 0 ||
       node.frontmatter.aid !== singles[index - 1].node.frontmatter.aid

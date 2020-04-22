@@ -1,9 +1,9 @@
 {
-  "name": "gatsby-starter-default",
+  "name": "lgqm",
   "private": true,
-  "description": "A simple starter to get up and developing quickly with Gatsby",
-  "version": "0.1.0",
-  "author": "Kyle Mathews <mathews.kyle@gmail.com>",
+  "description": "临高启明公开图书馆",
+  "version": "0.2.0",
+  "author": "Halulu <lzjluzijie@gmail.com>",
   "dependencies": {
     "bulma": "^0.8.2",
     "gatsby": "^2.20.25",
@@ -26,10 +26,6 @@
   "devDependencies": {
     "prettier": "2.0.4"
   },
-  "keywords": [
-    "gatsby"
-  ],
-  "license": "MIT",
   "scripts": {
     "build": "gatsby build",
     "develop": "gatsby develop",
