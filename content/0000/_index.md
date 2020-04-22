@@ -1,7 +1,7 @@
 ---
 title: 图书馆指南
 aid: 0
-author: 某图书管理员
+author: Halulu
 tags:
 ---
 

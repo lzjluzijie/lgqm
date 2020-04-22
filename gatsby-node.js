@@ -2,6 +2,33 @@ const path = require(`path`)
 const execa = require(`execa`)
 const { createFilePath } = require(`gatsby-source-filesystem`)
 
+let lastmodMap = new Map()
+const { stdout } = execa.sync(`git`, [
+  `-c`,
+  `diff.renames=0`,
+  `-c`,
+  `log.showSignature=0`,
+  `-C`,
+  `.`,
+  `log`,
+  `--name-only`,
+  `--no-merges`,
+  `--format=format:!%ai!`,
+  `HEAD`,
+])
+
+let lastmod = +new Date()
+stdout.split(`\n`).forEach(line => {
+  if (line[0] === `!` && line[line.length - 1] === `!`) {
+    lastmod = +new Date(line.substring(1, line.length - 1))
+    // console.log(lastmod)
+  } else if (line.substring(0, 8) === `content/`) {
+    lastmodMap.set(line.substring(8), lastmod)
+  }
+})
+// console.log(lastmodMap)
+console.log(`Finished loading lastmod`)
+
 exports.onCreateNode = ({ node, getNode, actions }) => {
   const { createNodeField } = actions
 
@@ -13,22 +40,14 @@ exports.onCreateNode = ({ node, getNode, actions }) => {
       ? `/${file.relativeDirectory}/`
       : createFilePath({ node, getNode })
 
-    let time = node.frontmatter.lastmod
-    if (time === undefined) {
-      const { stdout } = execa.sync(`git`, [
-        `log`,
-        `-1`,
-        `--pretty=format:%aI`,
-        file.absolutePath,
-      ])
-      // console.log(stdout)
-      time = stdout
-    }
+    const time = node.frontmatter.lastmod
+      ? +new Date(node.frontmatter.lastmod)
+      : lastmodMap.get(file.relativePath)
 
     createNodeField({
       node,
       name: `lastmod`,
-      value: +new Date(time),
+      value: time,
     })
 
     createNodeField({
@@ -92,13 +111,18 @@ exports.createPages = async ({ graphql, actions }) => {
       ) {
         edges {
           node {
+            html
             fields {
-              slug
               type
+              lastmod
+              slug
+              path
             }
             frontmatter {
               aid
+              zid
               title
+              author
             }
           }
         }
@@ -109,11 +133,17 @@ exports.createPages = async ({ graphql, actions }) => {
   if (singleResult.errors) throw singleResult.errors
 
   const singles = singleResult.data.allMarkdownRemark.edges
+
+  console.log("Start to create single pages")
+
   singles.forEach((post, index) => {
     const node = post.node
+    // console.log(node.fields.path)
+    // node.fields.lastmod = lastmodMap.get(node.fields.path)
+    // console.log(node.fields.lastmod)
 
     const parent = lists.get(node.frontmatter.aid)
-    parent.singles.push(node)
+    // parent.singles.push(node)
 
     const prev =
       index === 0 ||
@@ -132,13 +162,20 @@ exports.createPages = async ({ graphql, actions }) => {
       context: {
         aid: node.frontmatter.aid,
         zid: node.frontmatter.zid,
+        title: node.frontmatter.title,
+        author: node.frontmatter.author,
+        lastmod: node.fields.lastmod,
         slug: node.fields.slug,
-        parent,
-        prev,
-        next,
+        rPath: node.fields.path,
+        html: node.html,
+        parent: { ...parent.fields, ...parent.frontmatter },
+        prev: prev && { ...prev.fields, ...prev.frontmatter },
+        next: next && { ...next.fields, ...next.frontmatter },
       },
     })
   })
+
+  console.log("Single pages finished")
 
   listResult.data.allMarkdownRemark.edges.forEach(({ node }) => {
     createPage({

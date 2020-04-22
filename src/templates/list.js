@@ -33,7 +33,6 @@ export default ({ data }) => (
       <>
         <p className="subtitle">
           本卷共收录 {data.allMarkdownRemark.nodes.length} 篇文章
-          <span className="has-text-right">111</span>
         </p>
         <table className="table is-fullwidth">
           <thead>

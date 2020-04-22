@@ -1,34 +1,30 @@
 import React from "react"
-import { graphql, Link } from "gatsby"
+import { Link } from "gatsby"
 import Layout from "../components/layout"
 import SEO from "../components/seo"
 import Next from "../components/next"
 import Git from "../components/git"
 
-export default ({ data, pageContext }) => (
+export default ({ pageContext }) => (
   <Layout>
-    <SEO title={data.markdownRemark.frontmatter.title} />
+    <SEO title={pageContext.title} />
     <Next
       prev={pageContext.prev}
       parent={pageContext.parent}
       next={pageContext.next}
     ></Next>
     <article className={"post content"}>
-      <h1 className={"title has-text-centered"}>
-        {data.markdownRemark.frontmatter.title}
-      </h1>
+      <h1 className={"title has-text-centered"}>{pageContext.title}</h1>
       <p className={"subtitle has-text-centered"}>
-        <Link to={pageContext.parent.fields.slug}>
-          {pageContext.parent.frontmatter.title}
-        </Link>
+        <Link to={pageContext.parent.slug}>{pageContext.parent.title}</Link>
         {" | "}
-        {data.markdownRemark.frontmatter.author}
+        {pageContext.author}
         {" | "}
-        {new Date(data.markdownRemark.fields.lastmod).toLocaleDateString()}
+        {new Date(pageContext.lastmod).toLocaleDateString()}
         {" | "}
-        <Git path={data.markdownRemark.fields.path}></Git>
+        <Git path={pageContext.rPath}></Git>
       </p>
-      <div dangerouslySetInnerHTML={{ __html: data.markdownRemark.html }} />
+      <div dangerouslySetInnerHTML={{ __html: pageContext.html }} />
     </article>
     <Next
       prev={pageContext.prev}
@@ -37,22 +33,3 @@ export default ({ data, pageContext }) => (
     ></Next>
   </Layout>
 )
-
-export const query = graphql`
-  query($slug: String!) {
-    markdownRemark(fields: { slug: { eq: $slug } }) {
-      html
-      frontmatter {
-        aid
-        zid
-        title
-        author
-      }
-      fields {
-        lastmod
-        slug
-        path
-      }
-    }
-  }
-`
