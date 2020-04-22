@@ -2,7 +2,6 @@ import React from "react"
 import { Link } from "gatsby"
 
 const Next = ({ prev, parent, next }) => {
-  console.log(prev)
   const nop = prev && prev.fields.type === `single`
   const non = next && next.fields.type === `single`
   return (

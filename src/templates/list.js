@@ -16,6 +16,9 @@ export default ({ data }) => {
         <h1 className={"title has-text-centered"}>{post.frontmatter.title}</h1>
         <div dangerouslySetInnerHTML={{ __html: post.html }} />
       </article>
+      <p className="content is-size-4">
+        本卷共收录 {data.allMarkdownRemark.edges.length} 篇文章
+      </p>
       <table className="table is-fullwidth">
         <thead>
           <tr>

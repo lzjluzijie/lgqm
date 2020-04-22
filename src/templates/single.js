@@ -25,6 +25,11 @@ export default ({ data, pageContext }) => {
         </p>
         <div dangerouslySetInnerHTML={{ __html: post.html }} />
       </article>
+      <Next
+        prev={pageContext.prev}
+        parent={pageContext.parent}
+        next={pageContext.next}
+      ></Next>
     </Layout>
   )
 }

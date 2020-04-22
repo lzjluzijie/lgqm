@@ -62,21 +62,11 @@ exports.createPages = async ({ graphql, actions }) => {
 
   if (listResult.errors) throw listResult.errors
 
-  let lists = new Map()
+  const lists = new Map()
 
-  listResult.data.allMarkdownRemark.edges.forEach(({ node }) => {
+  listResult.data.allMarkdownRemark.edges.forEach(({ node }) =>
     lists.set(node.frontmatter.aid, node)
-    // console.log(lists.get(node.frontmatter.aid))
-
-    createPage({
-      path: node.fields.slug,
-      component: path.resolve(`./src/templates/list.js`),
-      context: {
-        aid: node.frontmatter.aid,
-        slug: node.fields.slug,
-      },
-    })
-  })
+  )
 
   const singleResult = await graphql(`
     query {
@@ -128,6 +118,17 @@ exports.createPages = async ({ graphql, actions }) => {
         parent,
         prev,
         next,
+      },
+    })
+  })
+
+  listResult.data.allMarkdownRemark.edges.forEach(({ node }) => {
+    createPage({
+      path: node.fields.slug,
+      component: path.resolve(`./src/templates/list.js`),
+      context: {
+        aid: node.frontmatter.aid,
+        slug: node.fields.slug,
       },
     })
   })

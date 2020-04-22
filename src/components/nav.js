@@ -57,6 +57,7 @@ export default class Navbar extends React.Component {
             <div className="navbar-dropdown">
               <a
                 className="navbar-item"
+                rel="noopener"
                 href="https://book.qidian.com/info/1262627"
                 target="_blank"
               >
@@ -64,6 +65,7 @@ export default class Navbar extends React.Component {
               </a>
               <a
                 className="navbar-item"
+                rel="noopener"
                 href="https://chuiniu.duanshu.com/"
                 target="_blank"
               >
@@ -72,6 +74,7 @@ export default class Navbar extends React.Component {
               <hr className="navbar-divider" />
               <a
                 className="navbar-item"
+                rel="noopener"
                 href="https://www.lgqm.gq/"
                 target="_blank"
               >
@@ -79,6 +82,7 @@ export default class Navbar extends React.Component {
               </a>
               <a
                 className="navbar-item"
+                rel="noopener"
                 href="https://lgqm.huijiwiki.com/"
                 target="_blank"
               >
