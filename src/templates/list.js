@@ -7,7 +7,6 @@ const id = (aid, zid) =>
   `${aid.toString().padStart(4, `0`)}.${zid.toString().padStart(4, `0`)}`
 
 export default ({ data }) => {
-  console.log(data)
   const post = data.markdownRemark
 
   return (
