@@ -3,19 +3,23 @@ const execa = require(`execa`)
 const { createFilePath } = require(`gatsby-source-filesystem`)
 
 let lastmodMap = new Map()
-const { stdout } = execa.sync(`git`, [
-  `-c`,
-  `diff.renames=0`,
-  `-c`,
-  `log.showSignature=0`,
-  `-C`,
-  `.`,
-  `log`,
-  `--name-only`,
-  `--no-merges`,
-  `--format=format:!%ai!`,
-  `HEAD`,
-])
+try {
+  const { stdout } = execa.sync(`git`, [
+    `-c`,
+    `diff.renames=0`,
+    `-c`,
+    `log.showSignature=0`,
+    `-C`,
+    `.`,
+    `log`,
+    `--name-only`,
+    `--no-merges`,
+    `--format=format:!%ai!`,
+    `HEAD`,
+  ])
+} catch (e) {
+  console.log(e)
+}
 
 let lastmod = +new Date()
 stdout.split(`\n`).forEach(line => {
