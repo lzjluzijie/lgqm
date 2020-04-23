@@ -22,8 +22,8 @@ stdout.split(`\n`).forEach(line => {
   if (line[0] === `!` && line[line.length - 1] === `!`) {
     lastmod = +new Date(line.substring(1, line.length - 1))
     // console.log(lastmod)
-  } else if (line.substring(0, 8) === `content/`) {
-    lastmodMap.set(line.substring(8), lastmod)
+  } else if (line !== ``) {
+    lastmodMap.set(line, lastmod)
   }
 })
 // console.log(lastmodMap)
@@ -42,7 +42,7 @@ exports.onCreateNode = ({ node, getNode, actions }) => {
 
     const time = node.frontmatter.lastmod
       ? +new Date(node.frontmatter.lastmod)
-      : lastmodMap.get(file.relativePath)
+      : lastmodMap.get(`content/${file.relativePath}`)
 
     createNodeField({
       node,
