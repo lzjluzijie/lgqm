@@ -3,6 +3,7 @@ const execa = require(`execa`)
 const { createFilePath } = require(`gatsby-source-filesystem`)
 
 let lastmodMap = new Map()
+
 try {
   const { stdout } = execa.sync(`git`, [
     `-c`,
@@ -17,19 +18,19 @@ try {
     `--format=format:!%ai!`,
     `HEAD`,
   ])
+  let lastmod = +new Date()
+  stdout.split(`\n`).forEach(line => {
+    if (line[0] === `!` && line[line.length - 1] === `!`) {
+      lastmod = +new Date(line.substring(1, line.length - 1))
+      // console.log(lastmod)
+    } else if (line !== ``) {
+      lastmodMap.set(line, lastmod)
+    }
+  })
 } catch (e) {
   console.log(e)
 }
 
-let lastmod = +new Date()
-stdout.split(`\n`).forEach(line => {
-  if (line[0] === `!` && line[line.length - 1] === `!`) {
-    lastmod = +new Date(line.substring(1, line.length - 1))
-    // console.log(lastmod)
-  } else if (line !== ``) {
-    lastmodMap.set(line, lastmod)
-  }
-})
 // console.log(lastmodMap)
 console.log(`Finished loading lastmod`)
 
