@@ -45,9 +45,10 @@ exports.onCreateNode = ({ node, getNode, actions }) => {
       ? `/${file.relativeDirectory}/`
       : createFilePath({ node, getNode })
 
-    const time = node.frontmatter.lastmod
-      ? +new Date(node.frontmatter.lastmod)
-      : lastmodMap.get(`content/${file.relativePath}`)
+    const time =
+      (node.frontmatter.lastmod
+        ? +new Date(node.frontmatter.lastmod)
+        : lastmodMap.get(`content/${file.relativePath}`)) || +new Date()
 
     createNodeField({
       node,
