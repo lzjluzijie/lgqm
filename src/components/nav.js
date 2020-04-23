@@ -60,7 +60,7 @@ export default class Navbar extends React.Component {
                 短书
               </a>
               <hr className="navbar-divider" />
-              <a className="navbar-item" href="https://www.lgqm.gq/">
+              <a className="navbar-item" href="https://lgqm.gq/">
                 论坛
               </a>
               <a className="navbar-item" href="https://lgqm.huijiwiki.com/">
