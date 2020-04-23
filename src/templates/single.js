@@ -1,30 +1,32 @@
 import React from "react"
-import { Link } from "gatsby"
+import { graphql, Link } from "gatsby"
 import Layout from "../components/layout"
 import SEO from "../components/seo"
 import Next from "../components/next"
 import Git from "../components/git"
 
-export default ({ pageContext }) => (
+export default ({ data, pageContext }) => (
   <Layout>
-    <SEO title={pageContext.title} />
+    <SEO title={data.markdownRemark.frontmatter.title} />
     <Next
       prev={pageContext.prev}
       parent={pageContext.parent}
       next={pageContext.next}
     ></Next>
     <article className={"post content"}>
-      <h1 className={"title has-text-centered"}>{pageContext.title}</h1>
+      <h1 className={"title has-text-centered"}>
+        {data.markdownRemark.frontmatter.title}
+      </h1>
       <p className={"subtitle has-text-centered"}>
         <Link to={pageContext.parent.slug}>{pageContext.parent.title}</Link>
         {" | "}
-        {pageContext.author}
+        {data.markdownRemark.frontmatter.author}
         {" | "}
-        {new Date(pageContext.lastmod).toLocaleDateString()}
+        {new Date(data.markdownRemark.fields.lastmod).toLocaleDateString()}
         {" | "}
-        <Git path={pageContext.rPath}></Git>
+        <Git path={data.markdownRemark.fields.path}></Git>
       </p>
-      <div dangerouslySetInnerHTML={{ __html: pageContext.html }} />
+      <div dangerouslySetInnerHTML={{ __html: data.markdownRemark.html }} />
     </article>
     <Next
       prev={pageContext.prev}
@@ -33,3 +35,22 @@ export default ({ pageContext }) => (
     ></Next>
   </Layout>
 )
+
+export const query = graphql`
+  query($slug: String!) {
+    markdownRemark(fields: { slug: { eq: $slug } }) {
+      html
+      frontmatter {
+        aid
+        zid
+        title
+        author
+      }
+      fields {
+        lastmod
+        slug
+        path
+      }
+    }
+  }
+`

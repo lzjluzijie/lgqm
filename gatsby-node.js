@@ -102,33 +102,20 @@ exports.createPages = async ({ graphql, actions }) => {
 
   if (listResult.errors) throw listResult.errors
 
-  const lists = new Map()
-
-  listResult.data.allMarkdownRemark.edges.forEach(({ node }) => {
-    node.singles = new Array()
-    lists.set(node.frontmatter.aid, node)
-  })
-
-  const singleResult = await graphql(`
+  listResult.data.allMarkdownRemark.edges.forEach(async ({ node }) => {
+    const singleResult = await graphql(`
     query {
       allMarkdownRemark(
-        sort: { fields: [frontmatter___aid, frontmatter___zid] }
-        filter: { fields: { type: { eq: "single" } } }
+        sort: { fields: frontmatter___zid }
+        filter: { fields: { type: { eq: "single" } } frontmatter: { aid: {eq: ${node.frontmatter.aid}}} }
       ) {
         edges {
           node {
-            html
             fields {
-              type
-              lastmod
               slug
-              path
             }
             frontmatter {
-              aid
-              zid
               title
-              author
             }
           }
         }
@@ -136,54 +123,38 @@ exports.createPages = async ({ graphql, actions }) => {
     }
   `)
 
-  if (singleResult.errors) throw singleResult.errors
+    if (singleResult.errors) throw singleResult.errors
 
-  const singles = singleResult.data.allMarkdownRemark.edges
+    const singles = singleResult.data.allMarkdownRemark.edges
+    const parent = node
 
-  console.log("Start to create single pages")
+    singles.forEach((single, index) => {
+      const node = single.node
 
-  singles.forEach((post, index) => {
-    const node = post.node
-    // console.log(node.fields.path)
-    // node.fields.lastmod = lastmodMap.get(node.fields.path)
-    // console.log(node.fields.lastmod)
+      const prev =
+        index === 0 ||
+        node.frontmatter.aid !== singles[index - 1].node.frontmatter.aid
+          ? null
+          : singles[index - 1].node
+      const next =
+        index === singles.length - 1 ||
+        node.frontmatter.aid !== singles[index + 1].node.frontmatter.aid
+          ? null
+          : singles[index + 1].node
 
-    const parent = lists.get(node.frontmatter.aid)
-    // parent.singles.push(node)
-
-    const prev =
-      index === 0 ||
-      node.frontmatter.aid !== singles[index - 1].node.frontmatter.aid
-        ? null
-        : singles[index - 1].node
-    const next =
-      index === singles.length - 1 ||
-      node.frontmatter.aid !== singles[index + 1].node.frontmatter.aid
-        ? null
-        : singles[index + 1].node
-
-    createPage({
-      path: node.fields.slug,
-      component: path.resolve(`./src/templates/single.js`),
-      context: {
-        aid: node.frontmatter.aid,
-        zid: node.frontmatter.zid,
-        title: node.frontmatter.title,
-        author: node.frontmatter.author,
-        lastmod: node.fields.lastmod,
-        slug: node.fields.slug,
-        rPath: node.fields.path,
-        html: node.html,
-        parent: { ...parent.fields, ...parent.frontmatter },
-        prev: prev && { ...prev.fields, ...prev.frontmatter },
-        next: next && { ...next.fields, ...next.frontmatter },
-      },
+      createPage({
+        path: node.fields.slug,
+        component: path.resolve(`./src/templates/single.js`),
+        context: {
+          title: node.frontmatter.title,
+          slug: node.fields.slug,
+          parent: { ...parent.fields, ...parent.frontmatter },
+          prev: prev && { ...prev.fields, ...prev.frontmatter },
+          next: next && { ...next.fields, ...next.frontmatter },
+        },
+      })
     })
-  })
 
-  console.log("Single pages finished")
-
-  listResult.data.allMarkdownRemark.edges.forEach(({ node }) => {
     createPage({
       path: node.fields.slug,
       component: path.resolve(`./src/templates/list.js`),
