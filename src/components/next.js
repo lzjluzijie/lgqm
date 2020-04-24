@@ -2,7 +2,7 @@ import React from "react"
 import { Link } from "gatsby"
 
 const Next = ({ prev, parent, next }) => (
-  <nav className="columns" style={{ padding: "20px" }}>
+  <nav className="columns">
     <div className="column has-text-centered">
       <p className="subtitle">{prev ? `上一章` : `返回`}</p>
       <Link className="title" to={prev ? prev.slug : parent.slug}>
