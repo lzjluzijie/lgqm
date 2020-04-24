@@ -36,7 +36,7 @@ export default class Navbar extends React.Component {
         className={`navbar-menu ${this.state.activeMenu ? "is-active" : ""}`}
       >
         <div className="navbar-start">
-          <Link className="navbar-item" to="/archive/">
+          <Link className="navbar-item" to="/catalog/">
             目录
           </Link>
           <Link className="navbar-item" to="/0000/">
