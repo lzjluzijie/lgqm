@@ -11,19 +11,25 @@ import Nav from "./nav"
 
 import "./style.scss"
 
-const Layout = ({ children }) => {
-  return (
+export default class Layout extends React.Component {
+  constructor(props) {
+    super(props)
+    if (!localStorage.getItem(`size`)) localStorage.setItem(`size`, 5)
+  }
+  state = {
+    size: localStorage.getItem(`size`),
+  }
+  updateSize = () => {
+    this.setState({ size: localStorage.getItem(`size`) })
+  }
+  render = () => (
     <>
-      <Nav />
+      <Nav updateSize={this.updateSize} />
       <section className={`section`}>
-        <main className={`container`}>{children}</main>
+        <main className={`container is-size-${this.state.size}`}>
+          {this.props.children}
+        </main>
       </section>
     </>
   )
 }
-
-Layout.propTypes = {
-  children: PropTypes.node.isRequired,
-}
-
-export default Layout

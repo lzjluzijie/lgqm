@@ -7,7 +7,7 @@
   "dependencies": {
     "bulma": "^0.8.2",
     "gatsby": "^2.20.25",
-    "gatsby-cli": "^2.11.15",
+    "gatsby-cli": "^2.11.22",
     "gatsby-image": "^2.3.4",
     "gatsby-plugin-google-analytics": "^2.2.4",
     "gatsby-plugin-manifest": "^2.3.5",

@@ -10,6 +10,19 @@ export default class Navbar extends React.Component {
       activeMenu: !this.state.activeMenu,
     })
   }
+  larger = () => {
+    let size = localStorage.getItem(`size`)
+    if (size >= 2) size--
+    console.log(size)
+    localStorage.setItem(`size`, size)
+    this.props.updateSize()
+  }
+  smaller = () => {
+    let size = localStorage.getItem(`size`)
+    if (size <= 6) size++
+    localStorage.setItem(`size`, size)
+    this.props.updateSize()
+  }
   render = () => (
     <nav className="navbar" role="navigation" aria-label="main navigation">
       <div className="navbar-brand">
@@ -72,10 +85,18 @@ export default class Navbar extends React.Component {
         <div className="navbar-end">
           <div className="navbar-item">
             <div className="buttons">
-              <button id="button-size-inc" className="button is-info">
+              <button
+                id="button-size-inc"
+                className="button is-info"
+                onClick={this.larger}
+              >
                 放大字体
               </button>
-              <button id="button-size-dec" className="button is-info">
+              <button
+                id="button-size-dec"
+                className="button is-info"
+                onClick={this.smaller}
+              >
                 缩小字体
               </button>
               <a
