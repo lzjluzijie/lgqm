@@ -14,10 +14,9 @@ import "./style.scss"
 export default class Layout extends React.Component {
   constructor(props) {
     super(props)
-    if (!localStorage.getItem(`size`)) localStorage.setItem(`size`, 5)
   }
   state = {
-    size: localStorage.getItem(`size`),
+    size: 5,
   }
   updateSize = () => {
     this.setState({ size: localStorage.getItem(`size`) })

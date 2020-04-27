@@ -11,13 +11,14 @@ export default class Navbar extends React.Component {
     })
   }
   larger = () => {
+    if (!localStorage.getItem(`size`)) localStorage.setItem(`size`, 6)
     let size = localStorage.getItem(`size`)
     if (size >= 2) size--
-    console.log(size)
     localStorage.setItem(`size`, size)
     this.props.updateSize()
   }
   smaller = () => {
+    if (!localStorage.getItem(`size`)) localStorage.setItem(`size`, 6)
     let size = localStorage.getItem(`size`)
     if (size <= 6) size++
     localStorage.setItem(`size`, size)
