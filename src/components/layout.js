@@ -6,7 +6,6 @@
  */
 
 import React from "react"
-import PropTypes from "prop-types"
 import Nav from "./nav"
 
 import "./style.scss"
@@ -14,9 +13,9 @@ import "./style.scss"
 export default class Layout extends React.Component {
   constructor(props) {
     super(props)
-  }
-  state = {
-    size: 5,
+    this.state = {
+      size: localStorage.getItem(`size`),
+    }
   }
   updateSize = () => {
     this.setState({ size: localStorage.getItem(`size`) })
