@@ -2,27 +2,27 @@
   "name": "lgqm",
   "private": true,
   "description": "临高启明公开图书馆",
-  "version": "0.2.0",
+  "version": "0.3.0",
   "author": "Halulu <lzjluzijie@gmail.com>",
   "dependencies": {
     "bulma": "^0.8.2",
-    "gatsby": "^2.20.25",
-    "gatsby-cli": "^2.11.22",
-    "gatsby-image": "^2.3.4",
-    "gatsby-plugin-google-analytics": "^2.2.4",
-    "gatsby-plugin-manifest": "^2.3.5",
-    "gatsby-plugin-offline": "^3.1.4",
-    "gatsby-plugin-react-helmet": "^3.2.4",
-    "gatsby-plugin-sass": "^2.2.3",
-    "gatsby-plugin-sharp": "^2.5.6",
-    "gatsby-plugin-sitemap": "^2.3.5",
-    "gatsby-source-filesystem": "^2.2.4",
-    "gatsby-transformer-remark": "^2.7.3",
-    "gatsby-transformer-sharp": "^2.4.6",
-    "node-sass": "^4.13.1",
+    "gatsby": "^2.21.4",
+    "gatsby-cli": "^2.12.4",
+    "gatsby-image": "^2.4.0",
+    "gatsby-plugin-google-analytics": "^2.3.0",
+    "gatsby-plugin-manifest": "^2.4.1",
+    "gatsby-plugin-offline": "^3.2.0",
+    "gatsby-plugin-react-helmet": "^3.3.0",
+    "gatsby-plugin-sass": "^2.3.0",
+    "gatsby-plugin-sharp": "^2.6.0",
+    "gatsby-plugin-sitemap": "^2.4.0",
+    "gatsby-source-filesystem": "^2.3.0",
+    "gatsby-transformer-remark": "^2.8.3",
+    "gatsby-transformer-sharp": "^2.5.0",
+    "node-sass": "^4.14.0",
     "prop-types": "^15.7.2",
-    "react": "^16.12.0",
-    "react-dom": "^16.12.0",
+    "react": "^16.13.1",
+    "react-dom": "^16.13.1",
     "react-helmet": "^6.0.0"
   },
   "devDependencies": {
@@ -39,9 +39,9 @@
   },
   "repository": {
     "type": "git",
-    "url": "https://github.com/gatsbyjs/gatsby-starter-default"
+    "url": "https://gitee.com/halulu/lgqm"
   },
   "bugs": {
-    "url": "https://github.com/gatsbyjs/gatsby/issues"
+    "url": "https://gitee.com/halulu/lgqm/issues"
   }
 }

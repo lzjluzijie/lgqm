@@ -40,6 +40,11 @@ exports.onCreateNode = ({ node, getNode, actions }) => {
   if (node.internal.type === `MarkdownRemark`) {
     const file = getNode(node.parent)
     const isList = file.base === `_index.md`
+    if (node.frontmatter.type === `data`) {
+      console.log(`data`)
+      return
+    }
+
     const type = isList ? `list` : `single`
     const slug = isList
       ? `/${file.relativeDirectory}/`
