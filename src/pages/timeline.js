@@ -4,10 +4,13 @@ import { graphql, Link } from "gatsby"
 import Layout from "../components/layout"
 import SEO from "../components/seo"
 
-const Archive = ({ data }) => {
+const Event = () => <tr></tr>
+
+const Timeline = ({ data }) => {
   const events = new Array()
   for (const n of data.allMarkdownRemark.nodes) {
     for (const e of n.htmlAst.children) {
+      console.log(toString(e))
       if (e.tagName === `h3`) events.push(e)
     }
   }
@@ -21,18 +24,22 @@ const Archive = ({ data }) => {
   )
 }
 
-export default Archive
+export default Timeline
 
 export const query = graphql`
-{
-  allMarkdownRemark(filter: {frontmatter: {type: {eq: "data"}, class: {eq: "timeline"}}}) {
-    nodes {
-      frontmatter {
-        title
-        author
+  {
+    allMarkdownRemark(
+      filter: {
+        frontmatter: { type: { eq: "data" }, class: { eq: "timeline" } }
       }
-      htmlAst
+    ) {
+      nodes {
+        frontmatter {
+          title
+          author
+        }
+        htmlAst
+      }
     }
   }
-}
 `
