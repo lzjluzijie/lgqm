@@ -20,12 +20,16 @@ export default ({ data, pageContext }) => {
           pageContext.next ? pageContext.next.slug : pageContext.parent.slug
         )
         break
+      default:
+        break
     }
   }
 
   return (
     <Layout>
-      <SEO title={data.markdownRemark.frontmatter.title} />
+      <SEO
+        title={`${data.markdownRemark.frontmatter.title} - ${pageContext.parent.title}`}
+      />
       <Next
         prev={pageContext.prev}
         parent={pageContext.parent}
