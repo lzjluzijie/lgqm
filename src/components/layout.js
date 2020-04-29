@@ -11,11 +11,8 @@ import Nav from "./nav"
 import "./style.scss"
 
 export default class Layout extends React.Component {
-  constructor(props) {
-    super(props)
-    this.state = {
-      size: localStorage.getItem(`size`),
-    }
+  state = {
+    size: 6,
   }
   updateSize = () => {
     this.setState({ size: localStorage.getItem(`size`) })
@@ -30,4 +27,7 @@ export default class Layout extends React.Component {
       </section>
     </>
   )
+  componentDidMount = () => {
+    this.updateSize()
+  }
 }
