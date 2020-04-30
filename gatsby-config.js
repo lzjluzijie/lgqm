@@ -31,9 +31,7 @@ module.exports = {
     },
     {
       resolve: `gatsby-transformer-remark`,
-      options: {
-        plugins: [`gatsby-lgqm-timeline`],
-      },
+      options: {},
     },
     `gatsby-transformer-sharp`,
     `gatsby-plugin-sharp`,
