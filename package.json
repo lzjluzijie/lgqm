@@ -1,0 +1,28 @@
+{
+  "name": "lgqm",
+  "version": "0.1.0",
+  "private": true,
+  "scripts": {
+    "dev": "next dev",
+    "build": "next build",
+    "start": "next start"
+  },
+  "dependencies": {
+    "gray-matter": "^4.0.2",
+    "next": "9.5.1",
+    "react": "16.13.1",
+    "react-dom": "16.13.1",
+    "rehype-stringify": "^8.0.0",
+    "remark-footnotes": "^1.0.0",
+    "remark-parse": "^8.0.3",
+    "remark-rehype": "^7.0.0",
+    "unified": "^9.1.0"
+  },
+  "prettier": {
+    "semi": false,
+    "printWidth": 80
+  },
+  "devDependencies": {
+    "bulma": "^0.9.0"
+  }
+}
