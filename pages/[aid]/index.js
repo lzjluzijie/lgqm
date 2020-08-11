@@ -73,8 +73,6 @@ export default function List({ data }) {
       <p className="subtitle has-text-centered">
         {author}
         {" | "}
-
-        {" | "}
         <Git path={`content/${aid}/_index.md`}></Git>
       </p>
       <p className="subtitle">

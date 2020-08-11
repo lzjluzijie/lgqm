@@ -66,7 +66,7 @@ export default function Single({ data }) {
         {" | "}
         {author}
         {" | "}
-        <Git path={`content/${aid}/${zid}`}></Git>
+        <Git path={`content/${aid}/${zid}.md`}></Git>
       </p>
       <div dangerouslySetInnerHTML={{ __html: html }} />
     </Layout>

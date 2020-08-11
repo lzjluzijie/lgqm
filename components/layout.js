@@ -1,9 +1,10 @@
 import React, { useState } from "react"
 import Head from "next/head"
 import Link from "next/link"
+import { useStorage } from "../utils/hooks"
 // import Header from './Header'
 
-function Navbar() {
+function Navbar({ fd, sx }) {
   const [menu, setMenu] = useState(false)
 
   return (
@@ -59,10 +60,10 @@ function Navbar() {
         <div className="navbar-end">
           <div className="navbar-item">
             <div className="buttons">
-              <button id="button-size-inc" className="button is-info">
+              <button className="button is-info" onClick={fd}>
                 放大字体
               </button>
-              <button id="button-size-dec" className="button is-info">
+              <button className="button is-info" onClick={sx}>
                 缩小字体
               </button>
               <a
@@ -80,6 +81,16 @@ function Navbar() {
 }
 
 export default function Layout({ children, title, ...props }) {
+  const [fontSize, setFontSize] = useStorage("fontsize", 0)
+  const fd = () => {
+    if (fontSize >= 8) return
+    setFontSize(fontSize + 1)
+  }
+  const sx = () => {
+    if (fontSize <= -8) return
+    setFontSize(fontSize - 1)
+  }
+
   return (
     <>
       <Head>
@@ -107,11 +118,14 @@ export default function Layout({ children, title, ...props }) {
 
         <title>{title} | 临高启明公开图书馆</title>
       </Head>
-      <header>
-        <Navbar />
-      </header>
+      <Navbar fd={fd} sx={sx} />
       <section className="container mx-auto">
-        <div className="content">{children}</div>
+        <div
+          className="content"
+          style={{ fontSize: `${Math.pow(1.125, fontSize)}em` }}
+        >
+          {children}
+        </div>
       </section>
     </>
   )
