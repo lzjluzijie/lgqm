@@ -59,7 +59,7 @@ export default function Single({ data }) {
   return (
     <Layout title={title}>
       <h3 className="title has-text-centered">{title}</h3>
-      <p className="subtitle has-text-centered">
+      <p className="subtitle has-text-centered" style={{ fontSize: "1.25em" }}>
         <Link href="/[aid]/" as={`/${aid}/`}>
           <a>返回分卷</a>
         </Link>

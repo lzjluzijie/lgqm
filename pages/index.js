@@ -24,7 +24,9 @@ export default function Home({ data }) {
   return (
     <Layout title="主页">
       <h2 className="title has-text-centered">目录</h2>
-      <p className="subtitle">以下是已收录分卷列表，共 {lists.length} 卷</p>
+      <p className="subtitle" style={{ fontSize: "1.25em" }}>
+        以下是已收录分卷列表，共 {lists.length} 卷
+      </p>
       <table className="table-auto w-full">
         <thead>
           <tr>
@@ -41,7 +43,7 @@ export default function Home({ data }) {
               <td>{list.aid}</td>
               <td>
                 <Link href="/[aid]/" as={`/${list.aid}/`}>
-                  {list.title}
+                  <a>{list.title}</a>
                 </Link>
               </td>
               <td>{list.author}</td>

@@ -1,4 +1,4 @@
-import React, { useState } from "react"
+import React, { useState, useEffect } from "react"
 import Head from "next/head"
 import Link from "next/link"
 import { useStorage } from "../utils/hooks"
@@ -90,6 +90,7 @@ export default function Layout({ children, title, ...props }) {
     if (fontSize <= -8) return
     setFontSize(fontSize - 1)
   }
+  const fs = Math.pow(1.125, fontSize)
 
   return (
     <>
@@ -120,10 +121,7 @@ export default function Layout({ children, title, ...props }) {
       </Head>
       <Navbar fd={fd} sx={sx} />
       <section className="container mx-auto">
-        <div
-          className="content"
-          style={{ fontSize: `${Math.pow(1.125, fontSize)}em` }}
-        >
+        <div className="content" style={{ fontSize: `${fs}em` }}>
           {children}
         </div>
       </section>

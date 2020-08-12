@@ -70,12 +70,12 @@ export default function List({ data }) {
   return (
     <Layout title={title}>
       <h3 className="title has-text-centered">{title}</h3>
-      <p className="subtitle has-text-centered">
+      <p className="subtitle has-text-centered" style={{ fontSize: "1.25em" }}>
         {author}
         {" | "}
         <Git path={`content/${aid}/_index.md`}></Git>
       </p>
-      <p className="subtitle">
+      <p className="subtitle" style={{ fontSize: "1.25em" }}>
         本卷共收录 {singles.length} 篇文章，共 {wordCount} 字。
       </p>
       <table className="table-auto w-full">
