@@ -33,8 +33,10 @@ export const getStaticProps = async ({ params }) => {
   const { aid } = params
 
   try {
-    const list = await fetchList(aid)
-    const index = await fetchListIndex(aid)
+    const f1 = fetchList(aid)
+    const f2 = fetchListIndex(aid)
+    const list = await f1
+    const index = await f2
     return { props: { data: { list, index }, params }, revalidate: 1 }
   } catch (error) {
     console.error(error)
@@ -75,6 +77,7 @@ export default function List({ data }) {
         {" | "}
         <Git path={`content/${aid}/_index.md`}></Git>
       </p>
+      <div dangerouslySetInnerHTML={{ __html: html }} />
       <p className="subtitle" style={{ fontSize: "1.25em" }}>
         本卷共收录 {singles.length} 篇文章，共 {wordCount} 字。
       </p>
@@ -100,7 +103,6 @@ export default function List({ data }) {
           ))}
         </tbody>
       </table>
-      <div dangerouslySetInnerHTML={{ __html: html }} />
     </Layout>
   )
 }
