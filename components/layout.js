@@ -51,6 +51,16 @@ export default function Layout({ children, title, ...props }) {
         <meta name="theme-color" content="#da532c" />
 
         <title>{title} | 临高启明公开图书馆</title>
+
+        <script
+          async
+          src="https://www.googletagmanager.com/gtag/js?id=UA-91028451-14"
+        />
+        <script
+          dangerouslySetInnerHTML={{
+            __html: `function gtag(){dataLayer.push(arguments)}window.dataLayer=window.dataLayer||[],gtag("js",new Date),gtag("config","UA-91028451-14");`,
+          }}
+        />
       </Head>
       <Navbar fd={fd} sx={sx} />
       <section className="section">
