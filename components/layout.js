@@ -54,9 +54,9 @@ export default function Layout({ children, title, ...props }) {
       </Head>
       <Navbar fd={fd} sx={sx} />
       <section className="section">
-        <div className="container content" style={{ fontSize: fs }}>
+        <main className="container" style={{ fontSize: fs }}>
           {children}
-        </div>
+        </main>
       </section>
     </>
   )

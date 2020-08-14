@@ -65,44 +65,50 @@ export default function List({ data }) {
 
   const { list, index } = data
   const ma = matter(index)
-  const { aid, title, author } = ma.data
-  const { wordCount, singles } = list.data
+  const { aid, author, title, wordCount, singles } = list.data
   const html = remark(ma.content)
 
   return (
     <Layout title={title}>
-      <h3 className="title has-text-centered">{title}</h3>
-      <p className="subtitle has-text-centered" style={{ fontSize: "1.25em" }}>
-        {author}
-        {" | "}
-        <Git path={`content/${aid}/_index.md`}></Git>
-      </p>
-      <div dangerouslySetInnerHTML={{ __html: html }} />
-      <p className="subtitle" style={{ fontSize: "1.25em" }}>
-        本卷共收录 {singles.length} 篇文章，共 {wordCount} 字。
-      </p>
-      <table className="table-auto w-full">
-        <thead>
-          <tr>
-            <th>编号</th>
-            <th>标题</th>
-            <th>上次修改</th>
-          </tr>
-        </thead>
-        <tbody>
-          {singles.map((single) => (
-            <tr key={single.zid}>
-              <td>{`${single.aid}.${single.zid}`}</td>
-              <td>
-                <Link href="/[aid]/[zid]" as={`/${aid}/${single.zid}`}>
-                  <a>{single.title}</a>
-                </Link>
-              </td>
-              <td>{new Date(single.lastmod).toLocaleDateString()}</td>
+      <article className="post content">
+        <h3 className="title has-text-centered">{title}</h3>
+        <p
+          className="subtitle has-text-centered"
+          style={{ fontSize: "1.25em" }}
+        >
+          {author}
+          {" | "}
+          <Git path={`content/${aid}/_index.md`}></Git>
+        </p>
+        <div dangerouslySetInnerHTML={{ __html: html }} />
+        <p className="subtitle" style={{ fontSize: "1.25em" }}>
+          本卷共收录 {singles.length} 篇文章，共 {wordCount} 字。
+        </p>
+        <table className="table-auto w-full">
+          <thead>
+            <tr>
+              <th>编号</th>
+              <th>标题</th>
+              <th>字数</th>
+              <th>上次修改</th>
             </tr>
-          ))}
-        </tbody>
-      </table>
+          </thead>
+          <tbody>
+            {singles.map((single) => (
+              <tr key={single.zid}>
+                <td>{`${single.aid}.${single.zid}`}</td>
+                <td>
+                  <Link href="/[aid]/[zid]" as={`/${aid}/${single.zid}`}>
+                    <a>{single.title}</a>
+                  </Link>
+                </td>
+                <td>{single.wordCount}</td>
+                <td>{new Date(single.lastmod).toLocaleDateString()}</td>
+              </tr>
+            ))}
+          </tbody>
+        </table>
+      </article>
     </Layout>
   )
 }
