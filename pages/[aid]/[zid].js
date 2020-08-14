@@ -74,11 +74,12 @@ const Next = ({ prev, next, aid, pt }) => (
         {prev ? "上一章" : "返回"}
       </p>
       <Link
-        className="subtitle"
         href={prev ? "/[aid]/[zid]" : "/[aid]/"}
         as={prev ? `/${aid}/${prev.zid}` : `/${aid}/`}
       >
-        <a>{prev ? prev.title : pt}</a>
+        <a className="subtitle" style={{ fontSize: "1.25em" }}>
+          {prev ? prev.title : pt}
+        </a>
       </Link>
     </div>
     <div className="column has-text-centered">
@@ -86,11 +87,12 @@ const Next = ({ prev, next, aid, pt }) => (
         {next ? "下一章" : "返回"}
       </p>
       <Link
-        className="subtitle"
         href={next ? "/[aid]/[zid]" : "/[aid]/"}
         as={next ? `/${aid}/${next.zid}` : `/${aid}/`}
       >
-        <a>{next ? next.title : pt}</a>
+        <a className="subtitle" style={{ fontSize: "1.25em" }}>
+          {next ? next.title : pt}
+        </a>
       </Link>
     </div>
   </nav>
@@ -119,7 +121,11 @@ export default function Single({ data }) {
   const rq = new Date(lastmod).toLocaleDateString()
   const ma = matter(text)
   const { aid, zid, title, author } = ma.data
-  const html = remark(ma.content)
+  const content = ma.content.replace(
+    /!\[(.*)\]\(\/(.*)\)/g,
+    "![$1](https://lgqm.halu.lu/$2)"
+  )
+  const html = remark(content)
 
   return (
     <Layout title={title}>

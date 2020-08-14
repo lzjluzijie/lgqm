@@ -66,7 +66,11 @@ export default function List({ data }) {
   const { list, index } = data
   const ma = matter(index)
   const { aid, author, title, wordCount, singles } = list.data
-  const html = remark(ma.content)
+  const content = ma.content.replace(
+    /!\[(.*)\]\(\/(.*)\)/g,
+    "![$1](https://lgqm.halu.lu/$2)"
+  )
+  const html = remark(content)
 
   return (
     <Layout title={title}>
@@ -81,7 +85,7 @@ export default function List({ data }) {
           <Git path={`content/${aid}/_index.md`}></Git>
         </p>
         <div dangerouslySetInnerHTML={{ __html: html }} />
-        <p className="subtitle" style={{ fontSize: "1.25em" }}>
+        <p className="subtitle mt-6" style={{ fontSize: "1.25em" }}>
           本卷共收录 {singles.length} 篇文章，共 {wordCount} 字。
         </p>
         <table className="table-auto w-full">
