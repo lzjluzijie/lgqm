@@ -126,7 +126,7 @@ export default function Single({ data }) {
   const { aid, zid, title, author } = ma.data
   const content = ma.content.replace(
     /!\[(.*)\]\(\/(.*)\)/g,
-    "![$1](https://lgqm.halu.lu/$2)"
+    "![$1](https://cdn.jsdelivr.net/gh/lzjluzijie/lgqm-tuku@main/$2)"
   )
   const html = remark(content)
 
