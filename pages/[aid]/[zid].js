@@ -13,6 +13,7 @@ export async function getStaticPaths() {
 
 async function fetchList(aid) {
   const res = await fetch(`https://lgqm-sjk.halu.lu/${aid}/index.json`)
+  if (res.status == 404) return null
   if (res.ok) {
     return res.json()
   }
@@ -24,6 +25,7 @@ async function fetchSingle(aid, zid) {
     `https://raw.githubusercontent.com/lzjluzijie/lgqm-sjk/main/content/${aid}/${zid}.md`
     // `https://cdn.jsdelivr.net/gh/lzjluzijie/lgqm-sjk@main/content/${aid}/${zid}.md`
   )
+  if (res.status == 404) return null
   if (res.ok) {
     return res.text()
   }
@@ -38,8 +40,9 @@ export const getStaticProps = async ({ params }) => {
     const f2 = fetchList(aid)
     const text = await f1
     const parent = await f2
-    const { title, singles } = parent.data
+    if (!text || !parent) return { props: { data: null } }
 
+    const { title, singles } = parent.data
     const i = singles.findIndex((e) => e.zid === zid)
     const data = {
       text,
@@ -103,16 +106,16 @@ export default function Single({ data }) {
 
   if (isFallback) {
     return (
-      <Layout title="Loading">
-        <div>Loading...</div>
+      <Layout title="加载中">
+        <div id="loading">加载中...</div>
       </Layout>
     )
   }
 
   if (!data) {
     return (
-      <Layout title="">
-        <Error text="No data" />
+      <Layout title="404 未找到页面">
+        <Error statusCode={404} title="未找到页面" />
       </Layout>
     )
   }
@@ -128,9 +131,9 @@ export default function Single({ data }) {
   const html = remark(content)
 
   return (
-    <Layout title={title}>
+    <Layout title={`${title} - ${pt}`}>
       <Next prev={prev} next={next} aid={aid} pt={pt} />
-      <article className="post content">
+      <article className="post content mb-6">
         <h3 className="title has-text-centered">{title}</h3>
         <p
           className="subtitle has-text-centered"

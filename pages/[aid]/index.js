@@ -13,6 +13,7 @@ export async function getStaticPaths() {
 
 async function fetchList(aid) {
   const res = await fetch(`https://lgqm-sjk.halu.lu/${aid}/index.json`)
+  if (res.status == 404) return null
   if (res.ok) {
     return res.json()
   }
@@ -23,6 +24,7 @@ async function fetchListIndex(aid) {
   const res = await fetch(
     `https://raw.githubusercontent.com/lzjluzijie/lgqm-sjk/main/content/${aid}/_index.md`
   )
+  if (res.status == 404) return null
   if (res.ok) {
     return res.text()
   }
@@ -37,6 +39,7 @@ export const getStaticProps = async ({ params }) => {
     const f2 = fetchListIndex(aid)
     const list = await f1
     const index = await f2
+    if (!list || !index) return { props: { data: null } }
     return { props: { data: { list, index }, params }, revalidate: 1 }
   } catch (error) {
     console.error(error)
@@ -49,23 +52,24 @@ export default function List({ data }) {
 
   if (isFallback) {
     return (
-      <Layout title="Loading">
-        <div>Loading...</div>
+      <Layout title="加载中">
+        <div id="loading">加载中...</div>
       </Layout>
     )
   }
 
   if (!data) {
     return (
-      <Layout title="">
-        <Error text="No data" />
+      <Layout title="404 未找到页面">
+        <Error statusCode={404} title="未找到页面" />
       </Layout>
     )
   }
 
   const { list, index } = data
   const ma = matter(index)
-  const { aid, author, title, wordCount, singles } = list.data
+  const { aid, author, lastmod, title, wordCount, singles } = list.data
+  const rq = new Date(lastmod).toLocaleDateString()
   const content = ma.content.replace(
     /!\[(.*)\]\(\/(.*)\)/g,
     "![$1](https://lgqm.halu.lu/$2)"
@@ -80,8 +84,7 @@ export default function List({ data }) {
           className="subtitle has-text-centered"
           style={{ fontSize: "1.25em" }}
         >
-          {author}
-          {" | "}
+          {`${author} | ${rq} | `}
           <Git path={`content/${aid}/_index.md`}></Git>
         </p>
         <div dangerouslySetInnerHTML={{ __html: html }} />

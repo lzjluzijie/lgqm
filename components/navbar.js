@@ -67,7 +67,13 @@ function Navbar({ fd, sx }) {
                 className="button is-primary"
                 href="https://gitee.com/halulu/lgqm"
               >
-                Git
+                数据库
+              </a>
+              <a
+                className="button is-primary"
+                href="https://github.com/lzjluzijie/lgqm"
+              >
+                源码
               </a>
             </div>
           </div>
