@@ -24,6 +24,12 @@ export default function Home({ data }) {
   return (
     <Layout title="主页">
       <article className="post content">
+        <h1 className="title has-text-centered">
+          欢迎来到：临高启明公开图书馆
+        </h1>
+        <p>
+          临高启明公开图书馆为爱好者建立的开源项目，目的是为临高启明读者提供较好的阅读与讨论环境，目前还处于初创阶段。本站非官方，无版权，请勿用于商业用途！
+        </p>
         <h2 className="title has-text-centered" id="catalog">
           目录
         </h2>

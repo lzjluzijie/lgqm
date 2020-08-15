@@ -65,7 +65,7 @@ function Navbar({ fd, sx }) {
               </button>
               <a
                 className="button is-primary"
-                href="https://gitee.com/halulu/lgqm"
+                href="https://gitee.com/lgqm/sjk"
               >
                 数据库
               </a>
