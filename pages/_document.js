@@ -1,9 +1,9 @@
-import Document, { Head, Main, NextScript } from "next/document"
+import Document, { Html, Head, Main, NextScript } from "next/document"
 
 export default class MyDocument extends Document {
   render() {
     return (
-      <html lang="zh-Hans">
+      <Html lang="zh-Hans">
         <Head>
           <link
             rel="apple-touch-icon"
@@ -47,7 +47,7 @@ export default class MyDocument extends Document {
           <Main />
           <NextScript />
         </body>
-      </html>
+      </Html>
     )
   }
 }

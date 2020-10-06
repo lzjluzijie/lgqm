@@ -6,7 +6,7 @@ import useStorage from "../utils/storage"
 const defaultFontSize = 0
 
 export default function Layout({ children, title, ...props }) {
-  const [fontSize, setFontSize] = useStorage(defaultFontSize)
+  const [fontSize, setFontSize] = useStorage("font-size", defaultFontSize)
   const fd = () => {
     if (fontSize >= 8) return
     setFontSize(fontSize + 1)

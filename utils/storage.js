@@ -3,13 +3,16 @@ import { useState, useEffect } from "react"
 export default function useStorage(storageKey, defaultData) {
   const [state, setState] = useState(defaultData)
   useEffect(() => {
-    if (!window.localStorage.getItem(storageKey)) {
+    let s = window.localStorage.getItem(storageKey)
+    if (!s) {
       window.localStorage.setItem(storageKey, JSON.stringify(defaultData))
+      s = window.localStorage.getItem(storageKey)
     }
     try {
-      setState(JSON.parse(window.localStorage.getItem(storageKey)))
+      setState(JSON.parse(s))
     } catch (e) {
       console.error(e)
+      console.log(s)
       setState(defaultData)
     }
   }, [])
