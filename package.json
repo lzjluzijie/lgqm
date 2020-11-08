@@ -9,14 +9,14 @@
   },
   "dependencies": {
     "gray-matter": "^4.0.2",
-    "next": "9.5.3",
+    "next": "9.5.5",
     "react": "16.13.1",
     "react-dom": "16.13.1",
     "rehype-stringify": "^8.0.0",
     "remark-footnotes": "^1.0.0",
     "remark-parse": "^8.0.3",
     "remark-rehype": "^7.0.0",
-    "unified": "^9.1.0"
+    "unified": "^9.2.0"
   },
   "prettier": {
     "semi": false,
