@@ -9,20 +9,17 @@
   },
   "dependencies": {
     "gray-matter": "^4.0.2",
-    "next": "9.5.5",
-    "react": "16.13.1",
-    "react-dom": "16.13.1",
-    "rehype-stringify": "^8.0.0",
-    "remark-footnotes": "^1.0.0",
-    "remark-parse": "^8.0.3",
-    "remark-rehype": "^7.0.0",
-    "unified": "^9.2.0"
+    "micromark": "^2.11.4",
+    "micromark-extension-footnote": "^0.3.2",
+    "next": "^10.0.0",
+    "react": "17.0.1",
+    "react-dom": "17.0.1"
   },
   "prettier": {
     "semi": false,
     "printWidth": 80
   },
   "devDependencies": {
-    "bulma": "^0.9.1"
+    "bulma": "^0.9.2"
   }
 }

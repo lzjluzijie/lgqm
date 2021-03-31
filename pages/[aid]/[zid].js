@@ -5,7 +5,7 @@ import { useRouter } from "next/router"
 import * as matter from "gray-matter"
 import Layout from "../../components/layout"
 import Git from "../../components/git"
-import remark from "../../utils/remark"
+import markdown from "../../utils/micromark"
 
 export async function getStaticPaths() {
   return { paths: [], fallback: true }
@@ -128,7 +128,7 @@ export default function Single({ data }) {
     /!\[(.*)\]\(\/(.*)\)/g,
     "![$1](https://cdn.jsdelivr.net/gh/lzjluzijie/lgqm-tuku@main/$2)"
   )
-  const html = remark(content)
+  const html = markdown(content)
 
   return (
     <Layout title={`${title} - ${pt}`}>

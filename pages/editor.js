@@ -1,6 +1,6 @@
 import React, { useState } from "react"
 import Layout from "../components/layout"
-import remark from "../utils/remark"
+import markdown from "../utils/micromark"
 import useStorage from "../utils/storage"
 
 export default function Editor() {
@@ -8,7 +8,7 @@ export default function Editor() {
   const handleChange = (event) => {
     setRaw(event.target.value)
   }
-  const data = remark(raw)
+  const data = markdown(raw)
   return (
     <Layout title="编辑器">
       <article className="post content">
