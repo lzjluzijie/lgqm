@@ -7,7 +7,7 @@
 - telegram 电报群(需要科学上网) https://t.me/lingaoqiming
 - QQ 群：点击 QQ 群号加入：[475191301](https://jq.qq.com/?_wv=1027&k=5o3GCYt)
 
-目前提供起点的之前正文搬运，之后以同人搬运为主。萧主任现在除了起点还在[短书](https://chuiniu.duanshu.com/)更新，大家可以去支持一下正版，毕竟八块八就能都看一遍。本站提供的内容都是从互联网上搜集的，不是官方，没有版权。
+本站提供的内容都是从互联网上搜集的，不是官方，没有版权，大家可以去支持一下正版。
 
 应各位要求，本人整理了 txt 精校版，加群即可下载，解压密码为本站域名 lgqm.halu.lu
 
@@ -15,27 +15,9 @@
 
 我的想法是做成一个提供临高启明相关内容阅读的网站，git 类似与 wiki 可以实现共享编辑，并且数据是完全公开的，任何人都可以随时复制。
 
-当前目标如下，当然如果只有我一个人是完不成的，能力和动力上都不太行。
+目前网站的 Git 仓库托管在 GitHub ，并使用 netlify 构建。
 
-- 网站设计
-
-  - [x] 基础设计
-
-  - [ ] 优化阅读体验 (字体大小，背景，阅读历史)
-  - [ ] SEO 优化
-
-- 数据收集
-  - [x] 起点原文
-  - [ ] 主要同人
-  - [ ] 临高启明 wiki
-  - [ ] 临高启明官方论坛
-  - [ ] 以往论坛
-  - [ ] 内容库设计 (文件结构，分类设计，数据库种类)
-
-目前网站的 Git 仓库托管在码云 Gitee 上，同时有 GitLab 和 GitHub 的镜像仓库，并使用 netlify 构建。
-
-- Gitee https://gitee.com/halulu/lgqm
-- GitLab https://gitlab.com/halulu/lgqm
-- GitHub https://github.com/lzjluzijie/lgqm
+- 网站源码 https://github.com/lzjluzijie/lgqm
+- 数据库 https://github.com/lzjluzijie/lgqm-sjk
 
 ---
