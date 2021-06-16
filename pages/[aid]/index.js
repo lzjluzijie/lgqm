@@ -5,46 +5,18 @@ import { useRouter } from "next/router"
 import * as matter from "gray-matter"
 import Layout from "../../components/layout"
 import Git from "../../components/git"
-import markdown from "../../utils/micromark"
+import markdown from "../../lib/micromark"
+import { fetchDir } from "../../lib/data"
 
 export async function getStaticPaths() {
   return { paths: [], fallback: true }
 }
 
-async function fetchList(aid) {
-  const res = await fetch(`https://lgqm-sjk.halu.lu/${aid}/index.json`)
-  if (res.status == 404) return null
-  if (res.ok) {
-    return res.json()
-  }
-  throw new Error(`Error`)
-}
-
-async function fetchListIndex(aid) {
-  const res = await fetch(
-    `https://raw.githubusercontent.com/lzjluzijie/lgqm-sjk/main/content/${aid}/_index.md`
-  )
-  if (res.status == 404) return null
-  if (res.ok) {
-    return res.text()
-  }
-  throw new Error(`Error`)
-}
-
 export const getStaticProps = async ({ params }) => {
   const { aid } = params
+  const data = await fetchDir(aid)
 
-  try {
-    const f1 = fetchList(aid)
-    const f2 = fetchListIndex(aid)
-    const list = await f1
-    const index = await f2
-    if (!list || !index) return { props: { data: null } }
-    return { props: { data: { list, index }, params }, revalidate: 1 }
-  } catch (error) {
-    console.error(error)
-    return { props: {} }
-  }
+  return { props: { data, params }, revalidate: 1 }
 }
 
 export default function List({ data }) {
@@ -66,15 +38,14 @@ export default function List({ data }) {
     )
   }
 
-  const { list, index } = data
-  const ma = matter(index)
-  const { aid, author, lastmod, title, wordCount, singles } = list.data
+  const { aid, content, author, lastmod, title, wordCount, pages } = data
   const rq = new Date(lastmod).toLocaleDateString()
-  const content = ma.content.replace(
-    /!\[(.*)\]\(\/(.*)\)/g,
-    "![$1](https://cdn.jsdelivr.net/gh/lzjluzijie/lgqm-tuku@main/$2)"
+  const html = markdown(
+    content.replace(
+      /!\[(.*)\]\(\/(.*)\)/g,
+      "![$1](https://cdn.jsdelivr.net/gh/lzjluzijie/lgqm-tuku@main/$2)"
+    )
   )
-  const html = markdown(content)
 
   return (
     <Layout title={title}>
@@ -89,7 +60,7 @@ export default function List({ data }) {
         </p>
         <div dangerouslySetInnerHTML={{ __html: html }} />
         <p className="subtitle mt-6" style={{ fontSize: "1.25em" }}>
-          本卷共收录 {singles.length} 篇文章，共 {wordCount} 字。
+          本卷共收录 {pages.length} 篇文章，约 {wordCount} 字。
         </p>
         <table className="table-auto w-full">
           <thead>
@@ -101,7 +72,7 @@ export default function List({ data }) {
             </tr>
           </thead>
           <tbody>
-            {singles.map((single) => (
+            {pages.map((single) => (
               <tr key={single.zid}>
                 <td>{`${single.aid}.${single.zid}`}</td>
                 <td>

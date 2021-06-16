@@ -1,18 +1,11 @@
 import Link from "next/link"
 import Layout from "../components/layout"
-
-async function fetchIndex() {
-  const res = await fetch(`https://lgqm-sjk.halu.lu/index.json`)
-  if (res.ok) {
-    return res.json()
-  }
-  throw new Error(`Error`)
-}
+import { fetchIndex } from "../lib/data"
 
 export const getStaticProps = async ({ params }) => {
   try {
-    const { data } = await fetchIndex()
-    return { props: { data }, revalidate: 1 }
+    const { lists } = await fetchIndex()
+    return { props: { data: {lists} }, revalidate: 1 }
   } catch (error) {
     return { props: {} }
   }

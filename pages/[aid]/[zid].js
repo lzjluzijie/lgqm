@@ -5,69 +5,43 @@ import { useRouter } from "next/router"
 import * as matter from "gray-matter"
 import Layout from "../../components/layout"
 import Git from "../../components/git"
-import markdown from "../../utils/micromark"
+import markdown from "../../lib/micromark"
+import { fetchPage, fetchDir } from "../../lib/data"
 
 export async function getStaticPaths() {
   return { paths: [], fallback: true }
 }
 
-async function fetchList(aid) {
-  const res = await fetch(`https://lgqm-sjk.halu.lu/${aid}/index.json`)
-  if (res.status == 404) return null
-  if (res.ok) {
-    return res.json()
-  }
-  throw new Error(`Error`)
-}
-
-async function fetchSingle(aid, zid) {
-  const res = await fetch(
-    `https://raw.githubusercontent.com/lzjluzijie/lgqm-sjk/main/content/${aid}/${zid}.md`
-    // `https://cdn.jsdelivr.net/gh/lzjluzijie/lgqm-sjk@main/content/${aid}/${zid}.md`
-  )
-  if (res.status == 404) return null
-  if (res.ok) {
-    return res.text()
-  }
-  throw new Error(`Error`)
-}
-
 export const getStaticProps = async ({ params }) => {
   const { aid, zid } = params
 
-  try {
-    const f1 = fetchSingle(aid, zid)
-    const f2 = fetchList(aid)
-    const text = await f1
-    const parent = await f2
-    if (!text || !parent) return { props: { data: null } }
+  const text = await fetchPage(aid, `${zid}.md`)
+  const parent = await fetchDir(aid)
+  if (!text || !parent) return { props: { data: null } }
 
-    const { title, singles } = parent.data
-    const i = singles.findIndex((e) => e.zid === zid)
-    const data = {
-      text,
-      pt: title,
-      lastmod: singles[i].lastmod,
-      wordCount: singles[i].wordCount,
-    }
-
-    if (i !== 0) {
-      data.prev = {
-        title: singles[i - 1].title,
-        zid: singles[i - 1].zid,
-      }
-    }
-    if (i !== singles.length - 1) {
-      data.next = {
-        title: singles[i + 1].title,
-        zid: singles[i + 1].zid,
-      }
-    }
-
-    return { props: { data, params }, revalidate: 1 }
-  } catch (error) {
-    return { props: {} }
+  const { title, pages } = parent
+  const i = pages.findIndex((e) => e.zid === zid)
+  const data = {
+    text,
+    pt: title,
+    lastmod: pages[i].lastmod,
+    wordCount: pages[i].wordCount,
   }
+
+  if (i !== 0) {
+    data.prev = {
+      title: pages[i - 1].title,
+      zid: pages[i - 1].zid,
+    }
+  }
+  if (i !== pages.length - 1) {
+    data.next = {
+      title: pages[i + 1].title,
+      zid: pages[i + 1].zid,
+    }
+  }
+
+  return { props: { data, params }, revalidate: 1 }
 }
 
 const Next = ({ prev, next, aid, pt }) => (
@@ -142,7 +116,7 @@ export default function Single({ data }) {
           <Link href="/[aid]/" as={`/${aid}/`}>
             <a>{pt}</a>
           </Link>
-          {` | ${author} | ${rq} | 共 ${wordCount} 字 | `}
+          {` | ${author} | ${rq} | 约 ${wordCount} 字 | `}
           <Git path={`content/${aid}/${zid}.md`}></Git>
         </p>
         <div dangerouslySetInnerHTML={{ __html: html }} />

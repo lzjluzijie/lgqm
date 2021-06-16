@@ -1,7 +1,7 @@
 import React, { useState } from "react"
 import Layout from "../components/layout"
-import markdown from "../utils/micromark"
-import useStorage from "../utils/storage"
+import markdown from "../lib/micromark"
+import useStorage from "../lib/storage"
 
 export default function Editor() {
   const [raw, setRaw] = useStorage("editor-raw", "# 临高启明")

@@ -2,3 +2,5 @@
 .cache
 .vercel
 node_modules
+*.json
+*.md
