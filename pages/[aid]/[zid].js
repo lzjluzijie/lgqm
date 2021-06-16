@@ -6,10 +6,25 @@ import * as matter from "gray-matter"
 import Layout from "../../components/layout"
 import Git from "../../components/git"
 import markdown from "../../lib/micromark"
-import { fetchPage, fetchDir } from "../../lib/data"
+import { fetchIndex, fetchPage, fetchDir } from "../../lib/data"
 
 export async function getStaticPaths() {
-  return { paths: [], fallback: true }
+  const { lists } = await fetchIndex()
+  const paths = []
+  lists.map(async (list) => {
+    const aid = list.aid
+    const parent = await fetchDir(aid)
+    parent.pages.map((page) => {
+      paths.push({
+        params: {
+          aid: aid,
+          zid: page.zid,
+        },
+      })
+    })
+  })
+
+  return { paths, fallback: false }
 }
 
 export const getStaticProps = async ({ params }) => {

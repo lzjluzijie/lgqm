@@ -3,12 +3,8 @@ import Layout from "../components/layout"
 import { fetchIndex } from "../lib/data"
 
 export const getStaticProps = async ({ params }) => {
-  try {
-    const { lists } = await fetchIndex()
-    return { props: { data: {lists} }, revalidate: 1 }
-  } catch (error) {
-    return { props: {} }
-  }
+  const { lists } = await fetchIndex()
+  return { props: { data: { lists } }, revalidate: false }
 }
 
 export default function Home({ data }) {
