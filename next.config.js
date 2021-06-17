@@ -11,6 +11,16 @@ module.exports = {
         destination: "/",
         permanent: true,
       },
+      {
+        source: '/9025',
+        destination: 'https://beichao.halu.lu',
+        permanent: true,
+      },
+      {
+        source: '/9025/:zid',
+        destination: 'https://beichao.halu.lu/beichao/:zid/',
+        permanent: true,
+      },
     ]
   },
 }

@@ -30,6 +30,9 @@ function Navbar({ fd, sx }) {
           <a className="navbar-item" href="https://t.me/lingaoqiming">
             讨论群
           </a>
+          <a className="navbar-item" href="https://beichao.halu.lu">
+            北朝
+          </a>
           <div className="navbar-item has-dropdown is-hoverable">
             <a className="navbar-link" href="/#">
               更多
@@ -63,12 +66,6 @@ function Navbar({ fd, sx }) {
               <button className="button is-info" onClick={sx}>
                 缩小字体
               </button>
-              <a
-                className="button is-primary"
-                href="https://github.com/lzjluzijie/lgqm-sjk"
-              >
-                数据库
-              </a>
               <a
                 className="button is-primary"
                 href="https://github.com/lzjluzijie/lgqm"
