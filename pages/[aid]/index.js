@@ -74,7 +74,6 @@ export default function List({ data }) {
               <th>编号</th>
               <th>标题</th>
               <th>字数</th>
-              <th>上次修改</th>
             </tr>
           </thead>
           <tbody>
@@ -87,7 +86,6 @@ export default function List({ data }) {
                   </Link>
                 </td>
                 <td>{single.wordCount}</td>
-                <td>{new Date(single.lastmod).toLocaleDateString()}</td>
               </tr>
             ))}
           </tbody>

@@ -32,7 +32,6 @@ export default function Home({ data }) {
               <th>标题</th>
               <th>作者</th>
               <th>文章数量</th>
-              <th>上次修改</th>
             </tr>
           </thead>
           <tbody>
@@ -46,7 +45,6 @@ export default function Home({ data }) {
                 </td>
                 <td>{list.author}</td>
                 <td>{list.length}</td>
-                <td>{new Date(list.lastmod).toLocaleDateString()}</td>
               </tr>
             ))}
           </tbody>

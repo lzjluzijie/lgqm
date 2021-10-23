@@ -110,7 +110,6 @@ export default function Single({ data }) {
   }
 
   const { text, pt, lastmod, wordCount, next, prev } = data
-  const rq = new Date(lastmod).toLocaleDateString()
   const ma = matter(text)
   const { aid, zid, title, author } = ma.data
   const content = ma.content.replace(
@@ -131,7 +130,7 @@ export default function Single({ data }) {
           <Link href="/[aid]/" as={`/${aid}/`}>
             <a>{pt}</a>
           </Link>
-          {` | ${author} | ${rq} | 约 ${wordCount} 字 | `}
+          {` | ${author} | 约 ${wordCount} 字 | `}
           <Git path={`content/${aid}/${zid}.md`}></Git>
         </p>
         <div dangerouslySetInnerHTML={{ __html: html }} />
