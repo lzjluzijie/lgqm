@@ -8,7 +8,7 @@ function MyApp({ Component, pageProps }) {
   useEffect(() => {
     const handleRouteChange = (url) => {
       // https://developers.google.com/analytics/devguides/collection/gtagjs/pages
-      window.gtag("config", "UA-91028451-14", {
+      window.gtag("config", "G-N915MBK8Q7", {
         page_path: url,
       })
     }
