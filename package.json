@@ -8,19 +8,19 @@
     "start": "next start"
   },
   "dependencies": {
-    "bulma": "^0.9.3",
+    "bulma": "^0.9.4",
     "gray-matter": "^4.0.3",
-    "micromark": "^2.11.4",
-    "micromark-extension-footnote": "^0.3.2",
-    "next": "^12.3.4",
-    "react": "17.0.2",
-    "react-dom": "17.0.2"
+    "micromark": "^3.1.0",
+    "micromark-extension-gfm-footnote": "^1.0.4",
+    "next": "^13.2.4",
+    "react": "18.2.0",
+    "react-dom": "18.2.0"
   },
   "prettier": {
     "semi": false,
     "printWidth": 80
   },
   "devDependencies": {
-    "prettier": "2.5.1"
+    "prettier": "2.8.7"
   }
 }

@@ -40,7 +40,7 @@ export default function Home({ data }) {
                 <td>{list.aid}</td>
                 <td>
                   <Link href="/[aid]/" as={`/${list.aid}/`}>
-                    <a>{list.title}</a>
+                    {list.title}
                   </Link>
                 </td>
                 <td>{list.author}</td>

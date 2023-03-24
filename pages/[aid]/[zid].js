@@ -68,10 +68,10 @@ const Next = ({ prev, next, aid, pt }) => (
       <Link
         href={prev ? "/[aid]/[zid]" : "/[aid]/"}
         as={prev ? `/${aid}/${prev.zid}` : `/${aid}/`}
+        className="subtitle"
+        style={{ fontSize: "1.25em" }}
       >
-        <a className="subtitle" style={{ fontSize: "1.25em" }}>
-          {prev ? prev.title : pt}
-        </a>
+        {prev ? prev.title : pt}
       </Link>
     </div>
     <div className="column has-text-centered">
@@ -81,10 +81,10 @@ const Next = ({ prev, next, aid, pt }) => (
       <Link
         href={next ? "/[aid]/[zid]" : "/[aid]/"}
         as={next ? `/${aid}/${next.zid}` : `/${aid}/`}
+        className="subtitle"
+        style={{ fontSize: "1.25em" }}
       >
-        <a className="subtitle" style={{ fontSize: "1.25em" }}>
-          {next ? next.title : pt}
-        </a>
+        {next ? next.title : pt}
       </Link>
     </div>
   </nav>
@@ -128,7 +128,7 @@ export default function Single({ data }) {
           style={{ fontSize: "1.25em" }}
         >
           <Link href="/[aid]/" as={`/${aid}/`}>
-            <a>{pt}</a>
+            {pt}
           </Link>
           {` | ${author} | 约 ${wordCount} 字 | `}
           <Git path={`content/${aid}/${zid}.md`}></Git>

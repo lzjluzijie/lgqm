@@ -82,7 +82,7 @@ export default function List({ data }) {
                 <td>{`${single.aid}.${single.zid}`}</td>
                 <td>
                   <Link href="/[aid]/[zid]" as={`/${aid}/${single.zid}`}>
-                    <a>{single.title}</a>
+                    {single.title}
                   </Link>
                 </td>
                 <td>{single.wordCount}</td>

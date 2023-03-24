@@ -7,10 +7,8 @@ function Navbar({ fd, sx }) {
   return (
     <nav className="navbar" role="navigation" aria-label="main navigation">
       <div className="navbar-brand">
-        <Link href="/">
-          <a className="navbar-item">
-            <strong>临高启明公开图书馆</strong>
-          </a>
+        <Link href="/" className="navbar-item">
+          <strong>临高启明公开图书馆</strong>
         </Link>
         <button
           className={`button navbar-burger burger ${menu && "is-active"}`}
