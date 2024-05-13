@@ -2,7 +2,12 @@
   "name": "lgqm",
   "version": "0.1.0",
   "private": true,
+  "main": "main.js",
+  "description": "desktop",
+  "author": "lgqm",
   "scripts": {
+    "electron": "electron .",
+    "electron-dev": "electron . --inspect",
     "dev": "next dev",
     "build": "next build",
     "start": "next start"
@@ -21,6 +26,7 @@
     "printWidth": 80
   },
   "devDependencies": {
+    "electron": "^30.0.3",
     "prettier": "2.8.7"
   }
 }

@@ -17,6 +17,13 @@
 
 目前网站的 Git 仓库托管在 GitHub ，并使用 netlify 构建。
 
+## 构建桌面版应用：
+- `npm install` 安装相关依赖
+- `npm run build` 构建项目
+- 需要使用管理员权限运行 `electron-builder --win --x64` 打包桌面版文件
+
+
+## 相关项目
 - 网站源码 https://github.com/lzjluzijie/lgqm
 - 数据库 https://github.com/lzjluzijie/lgqm-sjk
 
