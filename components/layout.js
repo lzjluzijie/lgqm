@@ -34,9 +34,9 @@ export default function Layout({ children, title, ...props }) {
           <Giscus
             id="comments"
             repo="lzjluzijie/lgqm-giscus"
-            repo-id="R_kgDONW3QMQ"
+            repoId="R_kgDONW3QMQ"
             category="Giscus"
-            category-id="DIC_kwDONW3QMc4Ckv9N"
+            categoryId="DIC_kwDONW3QMc4Ckv9N"
             mapping="pathname"
             term="Hello"
             reactionsEnabled="1"
