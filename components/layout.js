@@ -1,7 +1,8 @@
-import React, { useState, useEffect } from "react"
+import React from "react"
 import Head from "next/head"
 import Navbar from "./navbar"
 import useStorage from "../lib/storage"
+import Giscus from '@giscus/react'
 
 const defaultFontSize = 0
 
@@ -26,6 +27,25 @@ export default function Layout({ children, title, ...props }) {
       <section className="section">
         <main className="container" style={{ fontSize: fs }}>
           {children}
+        </main>
+      </section>
+      <section className="section">
+        <main className="container">
+          <Giscus
+            id="comments"
+            repo="lzjluzijie/lgqm-giscus"
+            repo-id="R_kgDONW3QMQ"
+            category="Giscus"
+            category-id="DIC_kwDONW3QMc4Ckv9N"
+            mapping="pathname"
+            term="Hello"
+            reactionsEnabled="1"
+            emitMetadata="0"
+            inputPosition="top"
+            theme="preferred_color_scheme"
+            lang="zh-CN"
+            loading="lazy"
+          />
         </main>
       </section>
     </>

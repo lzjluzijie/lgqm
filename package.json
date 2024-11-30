@@ -8,6 +8,7 @@
     "start": "next start"
   },
   "dependencies": {
+    "@giscus/react": "^3.0.0",
     "bulma": "1.0.2",
     "eslint-config-next": "15.0.3",
     "gray-matter": "4.0.3",
