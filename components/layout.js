@@ -21,7 +21,7 @@ export default function Layout({ children, title, ...props }) {
   return (
     <>
       <Head>
-        <title>{title} | 临高启明公开图书馆</title>
+        <title>{`${title} | 临高启明公开图书馆`}</title>
       </Head>
       <Navbar fd={fd} sx={sx} />
       <section className="section">
