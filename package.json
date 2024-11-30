@@ -22,6 +22,7 @@
     "printWidth": 80
   },
   "devDependencies": {
-    "prettier": "3.4.1"
+    "prettier": "3.4.1",
+    "sass": "^1.81.0"
   }
 }

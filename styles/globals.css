@@ -1,7 +1,0 @@
-@import "../node_modules/bulma/css/bulma.min.css";
-
-.content > div img {
-  margin-left: auto;
-  margin-right: auto;
-  display: block;
-}

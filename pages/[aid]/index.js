@@ -45,7 +45,6 @@ export default function List({ data }) {
   }
 
   const { aid, content, author, lastmod, title, wordCount, pages } = data
-  const rq = new Date(lastmod).toLocaleDateString()
   const html = markdown(
     content.replace(
       /!\[(.*)\]\(\/(.*)\)/g,
@@ -61,7 +60,7 @@ export default function List({ data }) {
           className="subtitle has-text-centered"
           style={{ fontSize: "1.25em" }}
         >
-          {`${author} | ${rq} | `}
+          {`${author} | `}
           <Git path={`content/${aid}/_index.md`}></Git>
         </p>
         <div dangerouslySetInnerHTML={{ __html: html }} />

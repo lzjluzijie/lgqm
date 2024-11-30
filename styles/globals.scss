@@ -1,0 +1,12 @@
+@import '~bulma/bulma';
+
+main img {
+  display: block;
+  margin-left: auto;
+  margin-right: auto;
+}
+
+.container .table-auto {
+  @extend .table;
+  @extend .is-fullwidth;
+}

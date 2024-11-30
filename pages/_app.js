@@ -2,7 +2,7 @@ import { useEffect } from "react"
 import Head from "next/head"
 import Router from "next/router"
 
-import "../styles/globals.css"
+import "../styles/globals.scss"
 
 function MyApp({ Component, pageProps }) {
   useEffect(() => {
