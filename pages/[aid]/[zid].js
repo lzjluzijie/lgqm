@@ -1,12 +1,12 @@
-import React from "react"
-import Link from "next/link"
-import Error from "next/error"
-import { useRouter } from "next/router"
-import * as matter from "gray-matter"
-import Layout from "../../components/layout"
-import Git from "../../components/git"
-import markdown from "../../lib/micromark"
-import { fetchIndex, fetchPage, fetchDir } from "../../lib/data"
+import React from 'react'
+import Link from 'next/link'
+import Error from 'next/error'
+import { useRouter } from 'next/router'
+import * as matter from 'gray-matter'
+import Layout from '../../components/layout'
+import Git from '../../components/git'
+import markdown from '../../lib/micromark'
+import { fetchIndex, fetchPage, fetchDir } from '../../lib/data'
 
 export async function getStaticPaths() {
   const { lists } = await fetchIndex()
@@ -62,27 +62,27 @@ export const getStaticProps = async ({ params }) => {
 const Next = ({ prev, next, aid, pt }) => (
   <nav className="columns">
     <div className="column has-text-centered">
-      <p className="title" style={{ fontSize: "1.25em" }}>
-        {prev ? "上一章" : "返回"}
+      <p className="title" style={{ fontSize: '1.25em' }}>
+        {prev ? '上一章' : '返回'}
       </p>
       <Link
-        href={prev ? "/[aid]/[zid]" : "/[aid]/"}
+        href={prev ? '/[aid]/[zid]' : '/[aid]/'}
         as={prev ? `/${aid}/${prev.zid}` : `/${aid}/`}
         className="subtitle"
-        style={{ fontSize: "1.25em" }}
+        style={{ fontSize: '1.25em' }}
       >
         {prev ? prev.title : pt}
       </Link>
     </div>
     <div className="column has-text-centered">
-      <p className="title" style={{ fontSize: "1.25em" }}>
-        {next ? "下一章" : "返回"}
+      <p className="title" style={{ fontSize: '1.25em' }}>
+        {next ? '下一章' : '返回'}
       </p>
       <Link
-        href={next ? "/[aid]/[zid]" : "/[aid]/"}
+        href={next ? '/[aid]/[zid]' : '/[aid]/'}
         as={next ? `/${aid}/${next.zid}` : `/${aid}/`}
         className="subtitle"
-        style={{ fontSize: "1.25em" }}
+        style={{ fontSize: '1.25em' }}
       >
         {next ? next.title : pt}
       </Link>
@@ -114,7 +114,7 @@ export default function Single({ data }) {
   const { aid, zid, title, author } = ma.data
   const content = ma.content.replace(
     /!\[(.*)\]\(\/(.*)\)/g,
-    "![$1](https://cdn.jsdelivr.net/gh/lzjluzijie/lgqm-tuku@main/$2)"
+    '![$1](https://cdn.jsdelivr.net/gh/lzjluzijie/lgqm-tuku@main/$2)',
   )
   const html = markdown(content)
 
@@ -125,7 +125,7 @@ export default function Single({ data }) {
         <h3 className="title has-text-centered">{title}</h3>
         <p
           className="subtitle has-text-centered"
-          style={{ fontSize: "1.25em" }}
+          style={{ fontSize: '1.25em' }}
         >
           <Link href="/[aid]/" as={`/${aid}/`}>
             {pt}

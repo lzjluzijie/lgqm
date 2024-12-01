@@ -1,10 +1,10 @@
-import React, { useState } from "react"
-import Layout from "../components/layout"
-import markdown from "../lib/micromark"
-import useStorage from "../lib/storage"
+import React, { useState } from 'react'
+import Layout from '../components/layout'
+import markdown from '../lib/micromark'
+import useStorage from '../lib/storage'
 
 export default function Editor() {
-  const [raw, setRaw] = useStorage("editor-raw", "# 临高启明")
+  const [raw, setRaw] = useStorage('editor-raw', '# 临高启明')
   const handleChange = (event) => {
     setRaw(event.target.value)
   }
@@ -19,7 +19,7 @@ export default function Editor() {
             value={raw}
             onChange={handleChange}
             rows={100}
-            style={{ width: "100%" }}
+            style={{ width: '100%' }}
           />
           <div
             className="column"

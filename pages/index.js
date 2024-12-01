@@ -1,7 +1,7 @@
-import Link from "next/link"
-import Layout from "../components/layout"
-import { fetchIndex } from "../lib/data"
-import markdown from "../lib/micromark"
+import Link from 'next/link'
+import Layout from '../components/layout'
+import { fetchIndex } from '../lib/data'
+import markdown from '../lib/micromark'
 
 export const getStaticProps = async ({ params }) => {
   const { lists } = await fetchIndex()
@@ -25,7 +25,7 @@ export default function Home({ data }) {
         <h2 className="title has-text-centered" id="catalog">
           目录
         </h2>
-        <p className="subtitle" style={{ fontSize: "1.25em" }}>
+        <p className="subtitle" style={{ fontSize: '1.25em' }}>
           以下是已收录分卷列表，共 {lists.length} 卷
         </p>
         <table className="table-auto w-full">

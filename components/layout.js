@@ -1,13 +1,13 @@
-import React from "react"
-import Head from "next/head"
-import Navbar from "./navbar"
-import useStorage from "../lib/storage"
+import React, { useEffect } from 'react'
+import Head from 'next/head'
+import Navbar from './navbar'
+import useStorage from '../lib/storage'
 import Giscus from '@giscus/react'
 
 const defaultFontSize = 0
 
 export default function Layout({ children, title, ...props }) {
-  const [fontSize, setFontSize] = useStorage("font-size", defaultFontSize)
+  const [fontSize, setFontSize] = useStorage('font-size', defaultFontSize)
   const fd = () => {
     if (fontSize >= 8) return
     setFontSize(fontSize + 1)
@@ -18,12 +18,21 @@ export default function Layout({ children, title, ...props }) {
   }
   const fs = `${Math.pow(1.125, fontSize)}em`
 
+  const [theme, setTheme] = useStorage('theme', 'light')
+  const toggleTheme = () => {
+    setTheme(theme === 'dark' ? 'light' : 'dark')
+  }
+
+  useEffect(() => {
+    document.documentElement.setAttribute('data-theme', theme)
+  }, [theme])
+
   return (
     <>
       <Head>
         <title>{`${title} | 临高启明公开图书馆`}</title>
       </Head>
-      <Navbar fd={fd} sx={sx} />
+      <Navbar fd={fd} sx={sx} theme={toggleTheme} />
       <section className="section">
         <main className="container" style={{ fontSize: fs }}>
           {children}

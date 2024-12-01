@@ -1,12 +1,12 @@
-import React from "react"
-import Link from "next/link"
-import Error from "next/error"
-import { useRouter } from "next/router"
-import * as matter from "gray-matter"
-import Layout from "../../components/layout"
-import Git from "../../components/git"
-import markdown from "../../lib/micromark"
-import { fetchIndex, fetchDir } from "../../lib/data"
+import React from 'react'
+import Link from 'next/link'
+import Error from 'next/error'
+import { useRouter } from 'next/router'
+import * as matter from 'gray-matter'
+import Layout from '../../components/layout'
+import Git from '../../components/git'
+import markdown from '../../lib/micromark'
+import { fetchIndex, fetchDir } from '../../lib/data'
 
 export async function getStaticPaths() {
   const { lists } = await fetchIndex()
@@ -48,8 +48,8 @@ export default function List({ data }) {
   const html = markdown(
     content.replace(
       /!\[(.*)\]\(\/(.*)\)/g,
-      "![$1](https://cdn.jsdelivr.net/gh/lzjluzijie/lgqm-tuku@main/$2)"
-    )
+      '![$1](https://cdn.jsdelivr.net/gh/lzjluzijie/lgqm-tuku@main/$2)',
+    ),
   )
 
   return (
@@ -58,13 +58,13 @@ export default function List({ data }) {
         <h3 className="title has-text-centered">{title}</h3>
         <p
           className="subtitle has-text-centered"
-          style={{ fontSize: "1.25em" }}
+          style={{ fontSize: '1.25em' }}
         >
           {`${author} | `}
           <Git path={`content/${aid}/_index.md`}></Git>
         </p>
         <div dangerouslySetInnerHTML={{ __html: html }} />
-        <p className="subtitle mt-6" style={{ fontSize: "1.25em" }}>
+        <p className="subtitle mt-6" style={{ fontSize: '1.25em' }}>
           本卷共收录 {pages.length} 篇文章，约 {wordCount} 字。
         </p>
         <table className="table-auto w-full">

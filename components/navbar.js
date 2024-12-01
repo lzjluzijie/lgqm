@@ -1,7 +1,7 @@
-import React, { useState, useEffect } from "react"
-import Link from "next/link"
+import React, { useState, useEffect } from 'react'
+import Link from 'next/link'
 
-function Navbar({ fd, sx }) {
+function Navbar({ fd, sx, theme }) {
   const [menu, setMenu] = useState(false)
 
   return (
@@ -11,7 +11,7 @@ function Navbar({ fd, sx }) {
           <strong>临高启明公开图书馆</strong>
         </Link>
         <button
-          className={`button navbar-burger burger ${menu && "is-active"}`}
+          className={`button navbar-burger burger ${menu && 'is-active'}`}
           aria-label="menu"
           aria-expanded="false"
           data-target="navbar-main"
@@ -23,7 +23,7 @@ function Navbar({ fd, sx }) {
           <span aria-hidden="true" />
         </button>
       </div>
-      <div id="navbar-main" className={`navbar-menu ${menu && "is-active"}`}>
+      <div id="navbar-main" className={`navbar-menu ${menu && 'is-active'}`}>
         <div className="navbar-start">
           <a className="navbar-item" href="https://t.me/lingaoqiming">
             讨论群
@@ -58,6 +58,9 @@ function Navbar({ fd, sx }) {
         <div className="navbar-end">
           <div className="navbar-item">
             <div className="buttons">
+              <button className="button is-info" onClick={theme}>
+                黑白切换
+              </button>
               <button className="button is-info" onClick={fd}>
                 放大字体
               </button>
